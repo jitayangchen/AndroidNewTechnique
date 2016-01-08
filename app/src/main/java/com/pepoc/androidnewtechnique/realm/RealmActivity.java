@@ -3,6 +3,8 @@ package com.pepoc.androidnewtechnique.realm;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
 
 import com.pepoc.androidnewtechnique.R;
 
@@ -25,14 +27,34 @@ public class RealmActivity extends AppCompatActivity {
         RealmConfiguration config = new RealmConfiguration.Builder(this)
                 .name("School")
                 .build();
-        Realm realm = Realm.getInstance(config);
-        realm.beginTransaction();
-        User user = realm.createObject(User.class);
-        user.setId(0);
-        user.setName("Yangchen");
-        user.setAge(26);
-        user.setSex("male");
-        realm.commitTransaction();
+        final Realm realm = Realm.getInstance(config);
+
+
+        findViewById(R.id.btn_add_data).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                realm.beginTransaction();
+                User user = realm.createObject(User.class);
+                user.setId(System.currentTimeMillis());
+                user.setName("Yangchen");
+                user.setAge(26);
+                user.setSex("male");
+                realm.commitTransaction();
+            }
+        });
+
+        findViewById(R.id.btn_modify).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User first = realm.where(User.class).findFirst();
+//                for (User user : results) {
+//                    user.setName("LALALALALA");
+//                    Log.i("LALALA", user.getId() + " --- " + user.getName());
+//                }
+                first.setName("LALALALALA");
+                Log.i("LALALA", first.getId() + " --- " + first.getName());
+            }
+        });
     }
 
 }
