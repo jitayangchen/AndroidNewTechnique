@@ -21,6 +21,10 @@
         <activity
             android:name=".realm.RealmActivity"
             android:label="@string/title_activity_realm"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".rxjava.RxJavaActivity"
+            android:label="@string/title_activity_rx_java"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
