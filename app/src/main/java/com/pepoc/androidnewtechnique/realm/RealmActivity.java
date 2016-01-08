@@ -26,8 +26,13 @@ public class RealmActivity extends AppCompatActivity {
                 .name("School")
                 .build();
         Realm realm = Realm.getInstance(config);
-        realm.beginTransaction();;
-
+        realm.beginTransaction();
+        User user = realm.createObject(User.class);
+        user.setId(0);
+        user.setName("Yangchen");
+        user.setAge(26);
+        user.setSex("male");
+        realm.commitTransaction();
     }
 
 }
