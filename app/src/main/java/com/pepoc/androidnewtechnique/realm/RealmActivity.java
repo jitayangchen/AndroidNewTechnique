@@ -46,12 +46,14 @@ public class RealmActivity extends AppCompatActivity {
         findViewById(R.id.btn_modify).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                realm.beginTransaction();
                 User first = realm.where(User.class).findFirst();
 //                for (User user : results) {
 //                    user.setName("LALALALALA");
 //                    Log.i("LALALA", user.getId() + " --- " + user.getName());
 //                }
                 first.setName("LALALALALA");
+                realm.commitTransaction();
                 Log.i("LALALA", first.getId() + " --- " + first.getName());
             }
         });
