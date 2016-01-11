@@ -5,19 +5,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.pepoc.androidnewtechnique.R;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class RealmActivity extends AppCompatActivity {
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.btn_add_data)
+    Button btnAddData;
+    @Bind(R.id.btn_modify)
+    Button btnModify;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_realm);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
         init();
@@ -25,12 +35,12 @@ public class RealmActivity extends AppCompatActivity {
 
     private void init() {
         RealmConfiguration config = new RealmConfiguration.Builder(this)
-                .name("School")
+                .name("Person")
                 .build();
         final Realm realm = Realm.getInstance(config);
 
 
-        findViewById(R.id.btn_add_data).setOnClickListener(new View.OnClickListener() {
+        btnAddData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 realm.beginTransaction();
@@ -43,7 +53,7 @@ public class RealmActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btn_modify).setOnClickListener(new View.OnClickListener() {
+        btnModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 realm.beginTransaction();
