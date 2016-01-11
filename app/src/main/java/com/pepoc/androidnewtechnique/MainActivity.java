@@ -45,14 +45,13 @@ public class MainActivity extends AppCompatActivity {
 
         final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        Observable.from(classList)
-                .subscribe(clazz -> {
-                        Button button = new Button(MainActivity.this);
-                        button.setLayoutParams(params);
-                        button.setText(clazz.getSimpleName());
-                        llMainContent.addView(button);
-                        RxView.clicks(button).subscribe(aVoid -> {startActivity(new Intent(MainActivity.this, clazz));});
-                });
+        Observable.from(classList).subscribe(clazz -> {
+            Button button = new Button(MainActivity.this);
+            button.setLayoutParams(params);
+            button.setText(clazz.getSimpleName());
+            llMainContent.addView(button);
+            RxView.clicks(button).subscribe(aVoid -> {startActivity(new Intent(MainActivity.this, clazz));});
+        });
     }
 
     private List<Class<? extends Activity>> getData() {
