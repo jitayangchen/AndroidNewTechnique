@@ -29,6 +29,14 @@
         <activity
             android:name=".rxbinding.RxBindingActivity"
             android:label="@string/title_activity_rx_binding"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".rxbus.RxBusActivity"
+            android:label="@string/title_activity_rx_bus"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".eventbus.EventBusActivity"
+            android:label="@string/title_activity_event_bus"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -4,4 +4,6 @@
     <string name="title_activity_realm">RealmActivity</string>
     <string name="title_activity_rx_java">RxJavaActivity</string>
     <string name="title_activity_rx_binding">RxBindingActivity</string>
+    <string name="title_activity_rx_bus">RxBusActivity</string>
+    <string name="title_activity_event_bus">EventBusActivity</string>
 </resources>

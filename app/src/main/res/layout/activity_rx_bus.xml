@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.pepoc.androidnewtechnique.MainActivity">
+    tools:context="com.pepoc.androidnewtechnique.rxbus.RxBusActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,6 +21,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <include layout="@layout/content_rx_bus" />
 
 </android.support.design.widget.CoordinatorLayout>

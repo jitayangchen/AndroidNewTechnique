@@ -1,53 +1,68 @@
 package com.pepoc.androidnewtechnique;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
+import com.jakewharton.rxbinding.view.RxView;
+import com.pepoc.androidnewtechnique.eventbus.EventBusActivity;
 import com.pepoc.androidnewtechnique.realm.RealmActivity;
+import com.pepoc.androidnewtechnique.rxbinding.RxBindingActivity;
+import com.pepoc.androidnewtechnique.rxbus.RxBusActivity;
+import com.pepoc.androidnewtechnique.rxjava.RxJavaActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import rx.Observable;
 
 public class MainActivity extends AppCompatActivity {
+
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.ll_main_content)
+    LinearLayout llMainContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
+
+        init();
+    }
+
+    private void init() {
         setSupportActionBar(toolbar);
+        List<Class<? extends Activity>> classList = getData();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, RealmActivity.class));
-            }
-        });
+        final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        Observable.from(classList)
+                .subscribe(clazz -> {
+                        Button button = new Button(MainActivity.this);
+                        button.setLayoutParams(params);
+                        button.setText(clazz.getSimpleName());
+                        llMainContent.addView(button);
+                        RxView.clicks(button).subscribe(aVoid -> {startActivity(new Intent(MainActivity.this, clazz));});
+                });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    private List<Class<? extends Activity>> getData() {
+        List<Class<? extends Activity>> classList = new ArrayList<>();
+        classList.add(EventBusActivity.class);
+        classList.add(RealmActivity.class);
+        classList.add(RxBindingActivity.class);
+        classList.add(RxBusActivity.class);
+        classList.add(RxJavaActivity.class);
+        return classList;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
