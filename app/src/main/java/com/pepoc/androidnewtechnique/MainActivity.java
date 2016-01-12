@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.ViewGroup;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -41,13 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         setSupportActionBar(toolbar);
-        List<Class<? extends Activity>> classList = getData();
 
-        final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        Observable.from(classList).subscribe(clazz -> {
-            Button button = new Button(MainActivity.this);
-            button.setLayoutParams(params);
+        Observable.from(getData()).subscribe(clazz -> {
+            Button button = (Button) View.inflate(MainActivity.this, R.layout.button, null);
             button.setText(clazz.getSimpleName());
             llMainContent.addView(button);
             RxView.clicks(button).subscribe(aVoid -> {startActivity(new Intent(MainActivity.this, clazz));});

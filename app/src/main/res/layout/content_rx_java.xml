@@ -12,4 +12,13 @@
     tools:context="com.pepoc.androidnewtechnique.rxjava.RxJavaActivity"
     tools:showIn="@layout/activity_rx_java">
 
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+    </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

@@ -45,5 +45,6 @@ dependencies {
     compile 'com.jakewharton.rxbinding:rxbinding:0.3.0'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.github.orhanobut:logger:1.12'
     retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.0.6'
 }
