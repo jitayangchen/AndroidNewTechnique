@@ -3,12 +3,12 @@ package com.pepoc.androidnewtechnique.rxbus;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.pepoc.androidnewtechnique.R;
+import com.pepoc.androidnewtechnique.log.LogManager;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -56,7 +56,7 @@ public class RxBusActivity extends AppCompatActivity {
         rxBus.toObserverable().subscribe(subscriber);
 
         RxView.clicks(btnUnsubscribe).subscribe(aVoid -> {
-            Log.i("LLL", "---------------- " + subscriber.isUnsubscribed());
+            LogManager.i("---------------- " + subscriber.isUnsubscribed());
             if (!subscriber.isUnsubscribed()) {
                 subscriber.unsubscribe();
             }

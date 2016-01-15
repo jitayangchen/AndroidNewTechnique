@@ -3,14 +3,13 @@ package com.pepoc.androidnewtechnique.rxjava;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.jakewharton.rxbinding.view.RxView;
-import com.orhanobut.logger.Logger;
 import com.pepoc.androidnewtechnique.R;
+import com.pepoc.androidnewtechnique.log.LogManager;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -21,6 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
 
@@ -69,6 +69,11 @@ public class RxJavaActivity extends AppCompatActivity {
 
     private List<String> getButtons() {
         List<String> textContents = new ArrayList<>();
+        textContents.add("create");
+        textContents.add("flatMap");
+        textContents.add("concatMap");
+        textContents.add("switchMap");
+        textContents.add("delay");
         textContents.add("timer");
         textContents.add("interval");
         textContents.add("range");
@@ -76,6 +81,176 @@ public class RxJavaActivity extends AppCompatActivity {
         textContents.add("repeatWhen");
         textContents.add("buffer");
         return textContents;
+    }
+
+    private void create() {
+        Observable.create(new Observable.OnSubscribe<String>() {
+
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                subscriber.onNext("LALALA");
+                subscriber.onNext("HAHAHA");
+                subscriber.onNext("HEHEHE");
+                subscriber.onCompleted();
+            }
+        }).subscribe(new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+                LogManager.i("---------onCompleted--------- ");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                LogManager.i("---------onNext--------- " + s);
+            }
+        });
+    }
+
+    /**
+     * flatMap操作符是把Observable产生的结果转换成多个Observable，然后把这多个Observable“扁平化”成一个Observable，
+     * 并依次提交产生的结果给订阅者。
+     * flatMap操作符通过传入一个函数作为参数转换源Observable，
+     * 在这个函数中，你可以自定义转换规则，最后在这个函数中返回一个新的Observable，
+     * 然后flatMap操作符通过合并这些Observable结果成一个Observable，并依次提交结果给订阅者。
+     * 值得注意的是，flatMap操作符在合并Observable结果时，有可能存在交叉的情况
+     */
+    private void flatMap() {
+        Observable.just(10, 20, 30).flatMap(new Func1<Integer, Observable<Integer>>() {
+            @Override
+            public Observable<Integer> call(Integer integer) {
+                return Observable.from(new Integer[]{integer, integer / 2}).delay(1, TimeUnit.SECONDS);
+            }
+        }).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Integer>() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                LogManager.i("------------onStart------------");
+            }
+
+            @Override
+            public void onCompleted() {
+                LogManager.i("------------onCompleted------------");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                LogManager.i("flatMap Next : " + integer);
+            }
+        });
+    }
+
+    /**
+     * cancatMap操作符与flatMap操作符类似，都是把Observable产生的结果转换成多个Observable，
+     * 然后把这多个Observable“扁平化”成一个Observable，并依次提交产生的结果给订阅者。
+     * 与flatMap操作符不同的是，concatMap操作符在处理产生的Observable时，
+     * 采用的是“连接(concat)”的方式，而不是“合并(merge)”的方式，这就能保证产生结果的顺序性，
+     * 也就是说提交给订阅者的结果是按照顺序提交的，不会存在交叉的情况。
+     */
+    private void concatMap() {
+        Observable.just(10, 20, 30).concatMap(new Func1<Integer, Observable<Integer>>() {
+            @Override
+            public Observable<Integer> call(Integer integer) {
+                return Observable.from(new Integer[]{integer, integer / 2}).delay(1, TimeUnit.SECONDS);
+            }
+        }).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Integer>() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                LogManager.i("------------onStart------------");
+            }
+
+            @Override
+            public void onCompleted() {
+                LogManager.i("------------onCompleted------------");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                LogManager.i("concatMap Next : " + integer);
+            }
+        });
+    }
+
+    /**
+     * switchMap操作符与flatMap操作符类似，都是把Observable产生的结果转换成多个Observable，
+     * 然后把这多个Observable“扁平化”成一个Observable，并依次提交产生的结果给订阅者。
+     * 与flatMap操作符不同的是，switchMap操作符会保存最新的Observable产生的结果而舍弃旧的结果，
+     * 举个例子来说，比如源Observable产生A、B、C三个结果，通过switchMap的自定义映射规则，
+     * 映射后应该会产生A1、A2、B1、B2、C1、C2，但是在产生B2的同时，C1已经产生了，这样最后的结果就变成A1、A2、B1、C1、C2，B2被舍弃掉了！
+     */
+    private void switchMap() {
+        Observable.just(10, 20, 30).switchMap(new Func1<Integer, Observable<Integer>>() {
+            @Override
+            public Observable<Integer> call(Integer integer) {
+                return Observable.from(new Integer[]{integer, integer / 2}).delay(1, TimeUnit.SECONDS);
+            }
+        }).subscribe(new Subscriber<Integer>() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                LogManager.i("------------onStart------------");
+            }
+
+            @Override
+            public void onCompleted() {
+                LogManager.i("------------onCompleted------------");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                LogManager.i("switchMap Next : " + integer);
+            }
+        });
+    }
+
+    /**
+     * 延时执行
+     */
+    private void delay() {
+        Observable.just("LALALA", "HAHAHA", "GAGAGA")
+                .delay(2, TimeUnit.SECONDS)
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        LogManager.i("------------onStart------------");
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        LogManager.i("------------onCompleted------------");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        LogManager.i(s);
+                    }
+                });
     }
 
     /**
@@ -86,22 +261,22 @@ public class RxJavaActivity extends AppCompatActivity {
             @Override
             public void onStart() {
                 super.onStart();
-                Logger.i("--------------------onStart-----------------------");
+                LogManager.i("--------------------onStart-----------------------");
             }
 
             @Override
             public void onCompleted() {
-                Logger.i("--------------------onCompleted-----------------------");
+                LogManager.i("--------------------onCompleted-----------------------");
             }
 
             @Override
             public void onError(Throwable e) {
-                Logger.i("--------------------onError-----------------------");
+                LogManager.i("--------------------onError-----------------------");
             }
 
             @Override
             public void onNext(Long aLong) {
-                Logger.i("--------------------onNext-----------------------");
+                LogManager.i("--------------------onNext-----------------------");
             }
         });
     }
@@ -113,7 +288,7 @@ public class RxJavaActivity extends AppCompatActivity {
         Observable.interval(1, TimeUnit.SECONDS).subscribe(new Action1<Long>() {
             @Override
             public void call(Long aLong) {
-                Logger.i("----------interval-------- " + aLong);
+                LogManager.i("----------interval-------- " + aLong);
             }
         });
     }
@@ -125,7 +300,7 @@ public class RxJavaActivity extends AppCompatActivity {
         Observable.range(5, 10).subscribe(new Action1<Integer>() {
             @Override
             public void call(Integer integer) {
-                Logger.i("----------------range------------------ " + integer.toString());
+                LogManager.i("----------------range------------------ " + integer.toString());
             }
         });
     }
@@ -138,26 +313,27 @@ public class RxJavaActivity extends AppCompatActivity {
         Observable.range(3, 3).repeat(2).subscribe(new Action1<Integer>() {
             @Override
             public void call(Integer integer) {
-                Logger.i("---------------repeat---------------- " + integer.toString());
+                LogManager.i("---------------repeat---------------- " + integer.toString());
             }
         });
     }
 
     /**
      * repeatWhen操作符是对某一个Observable，有条件地重新订阅从而产生多次结果
+     *
      * @see {@link #repeat()}
      */
     private void repeatWhen() {
         Observable.just(1, 2, 3).repeatWhen(new Func1<Observable<? extends Void>, Observable<?>>() {
             @Override
             public Observable<?> call(Observable<? extends Void> observable) {
-                Logger.i("---------call----------");
+                LogManager.i("---------call----------");
                 return observable.timer(2, TimeUnit.SECONDS);
             }
         }).subscribe(new Action1<Integer>() {
             @Override
             public void call(Integer integer) {
-                Logger.i("--------------call-------------- " + integer.toString());
+                LogManager.i("--------------call-------------- " + integer.toString());
             }
         });
     }
@@ -174,13 +350,13 @@ public class RxJavaActivity extends AppCompatActivity {
                     }
                 })
                 .repeat(10)
-                .buffer(3, TimeUnit.SECONDS)
+                .buffer(1, TimeUnit.SECONDS)
                 .subscribe(new Action1<List<String>>() {
                     @Override
                     public void call(List<String> strings) {
-                        Log.i("YY", "*********************************");
-                        Logger.i(strings.toString());
-                        Log.i("YY", "*********************************");
+                        LogManager.i("*********************************");
+                        LogManager.i(strings.toString());
+                        LogManager.i("*********************************");
                     }
                 });
     }
