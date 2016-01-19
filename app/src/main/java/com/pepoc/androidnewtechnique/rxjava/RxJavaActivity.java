@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.pepoc.androidnewtechnique.R;
+import com.pepoc.androidnewtechnique.log.LogFragment;
 import com.pepoc.androidnewtechnique.log.LogManager;
 
 import java.lang.reflect.Method;
@@ -30,6 +31,7 @@ public class RxJavaActivity extends AppCompatActivity {
     Toolbar toolbar;
     @Bind(R.id.ll_content)
     LinearLayout llContent;
+    private LogFragment fragmentLog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,11 @@ public class RxJavaActivity extends AppCompatActivity {
     private void init() {
         setSupportActionBar(toolbar);
 
+//        fragmentLog = (LogFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_log);
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.hide(fragmentLog);
+//        fragmentTransaction.commit();
+
         Class<? extends RxJavaActivity> aClass = RxJavaActivity.this.getClass();
         Observable.from(getButtons()).subscribe(new Action1<String>() {
             @Override
@@ -54,6 +61,11 @@ public class RxJavaActivity extends AppCompatActivity {
                     @Override
                     public void call(Void aVoid) {
                         try {
+//                            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                            fragmentTransaction.show(fragmentLog);
+//                            fragmentTransaction.commit();
+//                            fragmentLog.clear();
+
                             Method declaredMethod = aClass.getDeclaredMethod(s);
                             declaredMethod.setAccessible(true);
                             declaredMethod.invoke(RxJavaActivity.this);
@@ -82,7 +94,7 @@ public class RxJavaActivity extends AppCompatActivity {
         textContents.add("buffer");
         return textContents;
     }
-
+    
     private void create() {
         Observable.create(new Observable.OnSubscribe<String>() {
 
@@ -350,13 +362,11 @@ public class RxJavaActivity extends AppCompatActivity {
                     }
                 })
                 .repeat(10)
-                .buffer(1, TimeUnit.SECONDS)
+                .buffer(3, TimeUnit.SECONDS)
                 .subscribe(new Action1<List<String>>() {
                     @Override
                     public void call(List<String> strings) {
-                        LogManager.i("*********************************");
                         LogManager.i(strings.toString());
-                        LogManager.i("*********************************");
                     }
                 });
     }

@@ -12,4 +12,10 @@
     tools:context="com.pepoc.androidnewtechnique.eventbus.EventBusActivity"
     tools:showIn="@layout/activity_event_bus">
 
+    <Button
+        android:id="@+id/btn_android_eventbus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Android EventBus"/>
+
 </RelativeLayout>

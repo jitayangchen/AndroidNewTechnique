@@ -15,10 +15,17 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:id="@+id/ll_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"/>
+            android:orientation="vertical" />
     </android.support.v4.widget.NestedScrollView>
+
+    <!--<fragment
+        android:id="@+id/fragment_log"
+        android:name="com.pepoc.androidnewtechnique.log.LogFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>-->
 </RelativeLayout>

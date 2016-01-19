@@ -42,10 +42,6 @@ public class RxBusActivity extends AppCompatActivity {
 
         RxView.clicks(btnTest).subscribe(aVoid -> rxBus.send("Yangchen"));
 
-//        rxBus.toObserverable().subscribe(o -> {
-//            Toast.makeText(RxBusActivity.this, o.toString(), Toast.LENGTH_SHORT).show();
-//        });
-
         Subscriber subscriber = new TestSubscriber<Object>() {
             @Override
             public void onNext(Object o) {
