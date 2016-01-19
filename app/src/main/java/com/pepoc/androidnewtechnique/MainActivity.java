@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.pepoc.androidnewtechnique.eventbus.EventBusActivity;
+import com.pepoc.androidnewtechnique.jni.JniActivity;
 import com.pepoc.androidnewtechnique.realm.RealmActivity;
 import com.pepoc.androidnewtechnique.rxbinding.RxBindingActivity;
 import com.pepoc.androidnewtechnique.rxbus.RxBusActivity;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         classList.add(RxBindingActivity.class);
         classList.add(RxBusActivity.class);
         classList.add(RxJavaActivity.class);
+        classList.add(JniActivity.class);
         return classList;
     }
 

@@ -38,6 +38,10 @@
         <activity
             android:name=".eventbus.EventBusActivity"
             android:label="@string/title_activity_event_bus"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".jni.JniActivity"
+            android:label="@string/title_activity_jni"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
