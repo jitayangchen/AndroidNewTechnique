@@ -1,5 +1,5 @@
 # AndroidNewTechnique
 
-Realm Java Python Android YangHang Liangwenhao
+Realm Java Python Android
 
 https://realm.io/cn/docs/java/latest/
