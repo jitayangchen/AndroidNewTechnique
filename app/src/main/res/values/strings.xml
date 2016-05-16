@@ -10,4 +10,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_jni">JniActivity</string>
+    <string name="title_activity_spannable_string">SpannableStringActivity</string>
+    <string name="image">图片</string>
+    <string name="url">超链接</string>
+    <string name="color1">文字颜色</string>
+    <string name="color2">文字背景颜色</string>
+    <string name="underline">下划线</string>
+    <string name="strike">删除线</string>
+    <string name="style">粗体，斜体</string>
+    <string name="font">字体大小</string>
+    <string name="clickable">可点击文本</string>
+    <string name="title_activity_andfix">AndfixActivity</string>
+    <string name="title_activity_service_demo">ServiceDemoActivity</string>
 </resources>

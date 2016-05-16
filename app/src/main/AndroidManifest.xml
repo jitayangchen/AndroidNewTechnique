@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pepoc.androidnewtechnique">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".TApplication"
         android:allowBackup="true"
@@ -42,7 +46,35 @@
         <activity
             android:name=".jni.JniActivity"
             android:label="@string/title_activity_jni"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SpannableString.SpannableStringActivity"
+            android:label="@string/title_activity_spannable_string"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".andfix.AndfixActivity"
+            android:label="@string/title_activity_andfix"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".services.ServiceDemoActivity"
+            android:label="@string/title_activity_service_demo"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".services.IntentServiceDemo"
+            android:exported="true" />
+        <service
+            android:name=".services.ServicesDemo"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".okhttp.OkHttpActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".threadpool.ThreadPollDemoActivity" />
+        <activity android:name=".touchevent.TouchEventDemoActivity" />
+        <activity android:name=".handler.HandlerDemoActivity" />
+        <activity android:name=".sqlite.SqliteDemoActivity"></activity>
     </application>
 
 </manifest>

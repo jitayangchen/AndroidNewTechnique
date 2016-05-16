@@ -12,9 +12,21 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    signingConfigs {
+        release {
+            storeFile file('jiayuan.keystore')
+            storePassword 'jiayuan'
+            keyAlias 'jiayuan'
+            keyPassword 'jiayuan'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -54,4 +66,6 @@ dependencies {
     compile 'com.github.orhanobut:logger:1.12'
     compile 'com.android.support:support-v4:23.1.1'
     compile 'org.simple:androideventbus:1.0.5.1'
+    compile 'com.alipay.euler:andfix:0.4.0@aar'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
 }

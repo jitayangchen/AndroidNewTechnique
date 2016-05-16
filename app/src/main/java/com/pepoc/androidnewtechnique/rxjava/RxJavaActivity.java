@@ -277,7 +277,7 @@ public class RxJavaActivity extends AppCompatActivity {
 
             @Override
             public void onNext(Long aLong) {
-                LogManager.i("--------------------onNext-----------------------");
+                LogManager.i("--------------------onNext------------------- " + aLong);
             }
         });
     }
