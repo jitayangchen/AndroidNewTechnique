@@ -12,7 +12,9 @@ import android.widget.LinearLayout;
 import com.jakewharton.rxbinding.view.RxView;
 import com.pepoc.androidnewtechnique.SpannableString.SpannableStringActivity;
 import com.pepoc.androidnewtechnique.andfix.AndfixActivity;
+import com.pepoc.androidnewtechnique.asynctask.AsyncTaskDemoActivity;
 import com.pepoc.androidnewtechnique.eventbus.EventBusActivity;
+import com.pepoc.androidnewtechnique.fragment.FragmentDemoActivity;
 import com.pepoc.androidnewtechnique.handler.HandlerDemoActivity;
 import com.pepoc.androidnewtechnique.jni.JniActivity;
 import com.pepoc.androidnewtechnique.okhttp.OkHttpActivity;
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         classList.add(TouchEventDemoActivity.class);
         classList.add(HandlerDemoActivity.class);
         classList.add(SqliteDemoActivity.class);
+        classList.add(AsyncTaskDemoActivity.class);
+        classList.add(FragmentDemoActivity.class);
         return classList;
     }
 
