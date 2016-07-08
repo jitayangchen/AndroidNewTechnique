@@ -40,7 +40,13 @@ public class HandlerDemoActivity extends AppCompatActivity {
 //            }
 //        }, 10000);
 
-        init();
+//        init();
+
+        String mHead, mTail;
+        mHead = mTail = "asdfg";
+        mTail = "Yangchen";
+        LogManager.i(mHead);
+        LogManager.i(mTail);
     }
 
     private void init() {
@@ -51,6 +57,13 @@ public class HandlerDemoActivity extends AppCompatActivity {
                 updateButtonText();
             }
         });
+
+        findViewById(R.id.btn_cancel_action).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handler.removeCallbacks(handlerRunnable);
+            }
+        });
     }
 
     private void updateButtonText() {
@@ -59,14 +72,19 @@ public class HandlerDemoActivity extends AppCompatActivity {
             public void run() {
                 super.run();
 //                btnTest.setText("YYYYYYYYYY");
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        btnTest.setText("YYYYYYYYYY");
-                        LogManager.i("--------YYYYYYYYYY-------");
-                    }
-                });
+                handler.post(handlerRunnable);
             }
         }.start();
     }
+
+    Runnable handlerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            while (true) {
+                btnTest.setText("YYYYYYYYYY");
+                LogManager.i("--------YYYYYYYYYY-------");
+                handler.removeCallbacks(handlerRunnable);
+            }
+        }
+    };
 }

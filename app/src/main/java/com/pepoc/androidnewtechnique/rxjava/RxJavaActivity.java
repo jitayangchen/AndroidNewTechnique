@@ -43,10 +43,10 @@ public class RxJavaActivity extends AppCompatActivity {
     private void init() {
         setSupportActionBar(toolbar);
 
-        Class<? extends RxJavaActivity> aClass = RxJavaActivity.this.getClass();
+        final Class<? extends RxJavaActivity> aClass = RxJavaActivity.this.getClass();
         Observable.from(getButtons()).subscribe(new Action1<String>() {
             @Override
-            public void call(String s) {
+            public void call(final String s) {
                 Button button = (Button) View.inflate(RxJavaActivity.this, R.layout.button, null);
                 llContent.addView(button);
                 button.setText(s);

@@ -13,12 +13,16 @@ import com.pepoc.androidnewtechnique.log.LogManager;
 
 public class TestFragment extends Fragment {
 
+    private static TestFragment instance = null;
+
     public TestFragment() {
     }
 
     public static TestFragment newInstance() {
-        TestFragment fragment = new TestFragment();
-        return fragment;
+        if (instance == null) {
+            instance = new TestFragment();
+        }
+        return instance;
     }
 
     @Override

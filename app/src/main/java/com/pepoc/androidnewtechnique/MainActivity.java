@@ -3,6 +3,7 @@ package com.pepoc.androidnewtechnique;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,7 +18,9 @@ import com.pepoc.androidnewtechnique.eventbus.EventBusActivity;
 import com.pepoc.androidnewtechnique.fragment.FragmentDemoActivity;
 import com.pepoc.androidnewtechnique.handler.HandlerDemoActivity;
 import com.pepoc.androidnewtechnique.jni.JniActivity;
+import com.pepoc.androidnewtechnique.log.LogManager;
 import com.pepoc.androidnewtechnique.okhttp.OkHttpActivity;
+import com.pepoc.androidnewtechnique.process.ProcessDemoActivity;
 import com.pepoc.androidnewtechnique.realm.RealmActivity;
 import com.pepoc.androidnewtechnique.rxbinding.RxBindingActivity;
 import com.pepoc.androidnewtechnique.rxbus.RxBusActivity;
@@ -33,6 +36,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.Observable;
+import rx.functions.Action1;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,16 +52,26 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         init();
+
+        LogManager.i(Environment.getExternalStorageDirectory().getPath());
     }
 
     private void init() {
         setSupportActionBar(toolbar);
 
-        Observable.from(getData()).subscribe(clazz -> {
-            Button button = (Button) View.inflate(MainActivity.this, R.layout.button, null);
-            button.setText(clazz.getSimpleName());
-            llMainContent.addView(button);
-            RxView.clicks(button).subscribe(aVoid -> {startActivity(new Intent(MainActivity.this, clazz));});
+        Observable.from(getData()).subscribe(new Action1<Class<? extends Activity>>() {
+            @Override
+            public void call(final Class<? extends Activity> aClass) {
+                Button button = (Button) View.inflate(MainActivity.this, R.layout.button, null);
+                button.setText(aClass.getSimpleName());
+                llMainContent.addView(button);
+                RxView.clicks(button).subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        startActivity(new Intent(MainActivity.this, aClass));
+                    }
+                });
+            }
         });
     }
 
@@ -79,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         classList.add(SqliteDemoActivity.class);
         classList.add(AsyncTaskDemoActivity.class);
         classList.add(FragmentDemoActivity.class);
+        classList.add(ProcessDemoActivity.class);
         return classList;
     }
 

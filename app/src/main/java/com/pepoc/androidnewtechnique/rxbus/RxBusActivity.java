@@ -13,6 +13,7 @@ import com.pepoc.androidnewtechnique.log.LogManager;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.Subscriber;
+import rx.functions.Action1;
 
 public class RxBusActivity extends AppCompatActivity {
 
@@ -40,9 +41,14 @@ public class RxBusActivity extends AppCompatActivity {
 
         rxBus = new RxBus();
 
-        RxView.clicks(btnTest).subscribe(aVoid -> rxBus.send("Yangchen"));
+        RxView.clicks(btnTest).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                rxBus.send("Yangchen");
+            }
+        });
 
-        Subscriber subscriber = new TestSubscriber<Object>() {
+        final Subscriber subscriber = new TestSubscriber<Object>() {
             @Override
             public void onNext(Object o) {
                 Toast.makeText(RxBusActivity.this, o.toString(), Toast.LENGTH_SHORT).show();
@@ -51,10 +57,13 @@ public class RxBusActivity extends AppCompatActivity {
 
         rxBus.toObserverable().subscribe(subscriber);
 
-        RxView.clicks(btnUnsubscribe).subscribe(aVoid -> {
-            LogManager.i("---------------- " + subscriber.isUnsubscribed());
-            if (!subscriber.isUnsubscribed()) {
-                subscriber.unsubscribe();
+        RxView.clicks(btnUnsubscribe).subscribe(new Action1<Void>() {
+            @Override
+            public void call(Void aVoid) {
+                LogManager.i("---------------- " + subscriber.isUnsubscribed());
+                if (!subscriber.isUnsubscribed()) {
+                    subscriber.unsubscribe();
+                }
             }
         });
 

@@ -79,4 +79,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         cursor.close();
         return personList;
     }
+
+    public void delete() {
+        SQLiteDatabase db = getWritableDatabase();
+    }
 }
