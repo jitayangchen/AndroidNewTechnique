@@ -78,11 +78,12 @@
         <activity android:name=".asynctask.AsyncTaskDemoActivity" />
         <activity
             android:name=".fragment.FragmentDemoActivity"
-            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"/>
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation" />
         <activity
             android:name=".process.ProcessDemoActivity"
             android:process=":newProcess" />
-        <activity android:name=".bitmap.BitmapDemoActivity"></activity>
+        <activity android:name=".bitmap.BitmapDemoActivity" />
+        <activity android:name=".listview.RecyclerViewDemoActivity"></activity>
     </application>
 
 </manifest>

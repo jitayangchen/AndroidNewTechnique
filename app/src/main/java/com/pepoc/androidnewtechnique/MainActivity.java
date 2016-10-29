@@ -18,6 +18,7 @@ import com.pepoc.androidnewtechnique.eventbus.EventBusActivity;
 import com.pepoc.androidnewtechnique.fragment.FragmentDemoActivity;
 import com.pepoc.androidnewtechnique.handler.HandlerDemoActivity;
 import com.pepoc.androidnewtechnique.jni.JniActivity;
+import com.pepoc.androidnewtechnique.listview.RecyclerViewDemoActivity;
 import com.pepoc.androidnewtechnique.log.LogManager;
 import com.pepoc.androidnewtechnique.okhttp.OkHttpActivity;
 import com.pepoc.androidnewtechnique.process.ProcessDemoActivity;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         classList.add(AsyncTaskDemoActivity.class);
         classList.add(FragmentDemoActivity.class);
         classList.add(ProcessDemoActivity.class);
+        classList.add(RecyclerViewDemoActivity.class);
         return classList;
     }
 

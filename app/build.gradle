@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 //apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'plugin.test'
+//apply plugin: 'plugin.test'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
