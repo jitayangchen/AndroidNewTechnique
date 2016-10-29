@@ -20,6 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -282,16 +283,21 @@ public class RxJavaActivity extends AppCompatActivity {
         });
     }
 
+    Subscription subscribe = null;
     /**
      * 每隔一段时间循环执行任务
      */
     private void interval() {
-        Observable.interval(1, TimeUnit.SECONDS).subscribe(new Action1<Long>() {
-            @Override
-            public void call(Long aLong) {
-                LogManager.i("----------interval-------- " + aLong);
-            }
-        });
+        if (subscribe == null) {
+            subscribe = Observable.interval(1, TimeUnit.SECONDS).subscribe(new Action1<Long>() {
+                @Override
+                public void call(Long aLong) {
+                    LogManager.i("----------interval-------- " + aLong);
+                }
+            });
+        } else {
+            subscribe.unsubscribe();
+        }
     }
 
     /**
