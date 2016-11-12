@@ -14,20 +14,24 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.pepoc.androidnewtechnique.SpannableString.SpannableStringActivity;
 import com.pepoc.androidnewtechnique.andfix.AndfixActivity;
 import com.pepoc.androidnewtechnique.asynctask.AsyncTaskDemoActivity;
+import com.pepoc.androidnewtechnique.customview.CanvasDemoActivity;
 import com.pepoc.androidnewtechnique.eventbus.EventBusActivity;
 import com.pepoc.androidnewtechnique.fragment.FragmentDemoActivity;
 import com.pepoc.androidnewtechnique.handler.HandlerDemoActivity;
 import com.pepoc.androidnewtechnique.jni.JniActivity;
 import com.pepoc.androidnewtechnique.listview.RecyclerViewDemoActivity;
 import com.pepoc.androidnewtechnique.log.LogManager;
+import com.pepoc.androidnewtechnique.matrix.MatrixActivity;
 import com.pepoc.androidnewtechnique.okhttp.OkHttpActivity;
 import com.pepoc.androidnewtechnique.process.ProcessDemoActivity;
 import com.pepoc.androidnewtechnique.realm.RealmActivity;
 import com.pepoc.androidnewtechnique.rxbinding.RxBindingActivity;
 import com.pepoc.androidnewtechnique.rxbus.RxBusActivity;
 import com.pepoc.androidnewtechnique.rxjava.RxJavaActivity;
+import com.pepoc.androidnewtechnique.scroller.ScrollerActivity;
 import com.pepoc.androidnewtechnique.services.ServiceDemoActivity;
 import com.pepoc.androidnewtechnique.sqlite.SqliteDemoActivity;
+import com.pepoc.androidnewtechnique.svg.SVGActivity;
 import com.pepoc.androidnewtechnique.threadpool.ThreadPollDemoActivity;
 import com.pepoc.androidnewtechnique.touchevent.TouchEventDemoActivity;
 
@@ -78,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Class<? extends Activity>> getData() {
         List<Class<? extends Activity>> classList = new ArrayList<>();
+        classList.add(ScrollerActivity.class);
+        classList.add(MatrixActivity.class);
+        classList.add(CanvasDemoActivity.class);
         classList.add(EventBusActivity.class);
         classList.add(RealmActivity.class);
         classList.add(RxBindingActivity.class);
@@ -96,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         classList.add(FragmentDemoActivity.class);
         classList.add(ProcessDemoActivity.class);
         classList.add(RecyclerViewDemoActivity.class);
+        classList.add(SVGActivity.class);
         return classList;
     }
 

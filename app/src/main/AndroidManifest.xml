@@ -83,7 +83,11 @@
             android:name=".process.ProcessDemoActivity"
             android:process=":newProcess" />
         <activity android:name=".bitmap.BitmapDemoActivity" />
-        <activity android:name=".listview.RecyclerViewDemoActivity"></activity>
+        <activity android:name=".listview.RecyclerViewDemoActivity" />
+        <activity android:name=".svg.SVGActivity" />
+        <activity android:name=".customview.CanvasDemoActivity" />
+        <activity android:name=".matrix.MatrixActivity" />
+        <activity android:name=".scroller.ScrollerActivity"></activity>
     </application>
 
 </manifest>
