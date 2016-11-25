@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -14,6 +16,7 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.pepoc.androidnewtechnique.SpannableString.SpannableStringActivity;
 import com.pepoc.androidnewtechnique.andfix.AndfixActivity;
 import com.pepoc.androidnewtechnique.asynctask.AsyncTaskDemoActivity;
+import com.pepoc.androidnewtechnique.beziercurve.BezierCurveActivity;
 import com.pepoc.androidnewtechnique.customview.CanvasDemoActivity;
 import com.pepoc.androidnewtechnique.eventbus.EventBusActivity;
 import com.pepoc.androidnewtechnique.fragment.FragmentDemoActivity;
@@ -34,6 +37,7 @@ import com.pepoc.androidnewtechnique.sqlite.SqliteDemoActivity;
 import com.pepoc.androidnewtechnique.svg.SVGActivity;
 import com.pepoc.androidnewtechnique.threadpool.ThreadPollDemoActivity;
 import com.pepoc.androidnewtechnique.touchevent.TouchEventDemoActivity;
+import com.pepoc.androidnewtechnique.widget.WidgetActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Class<? extends Activity>> getData() {
         List<Class<? extends Activity>> classList = new ArrayList<>();
+        classList.add(BezierCurveActivity.class);
+        classList.add(WidgetActivity.class);
         classList.add(ScrollerActivity.class);
         classList.add(MatrixActivity.class);
         classList.add(CanvasDemoActivity.class);
@@ -107,4 +113,14 @@ public class MainActivity extends AppCompatActivity {
         return classList;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 }

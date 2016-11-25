@@ -48,24 +48,37 @@ public class BgWaterRipple extends View {
 
     }
 
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+//        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+//        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+//        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+//
+//        int width, height;
+//
+//        if (widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.EXACTLY) {
+//            width = widthSize;
+//            height = heightSize;
+//        } else {
+//            width = 400;
+//            height = 400;
+//        }
+//
+//        setMeasuredDimension(width, height);
+//    }
+
+
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        setLayerType(View.LAYER_TYPE_HARDWARE,null);
+    }
 
-        int width, height;
-
-        if (widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.EXACTLY) {
-            width = widthSize;
-            height = heightSize;
-        } else {
-            width = 400;
-            height = 400;
-        }
-
-        setMeasuredDimension(width, height);
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        setLayerType(View.LAYER_TYPE_NONE, null);
     }
 
     @Override

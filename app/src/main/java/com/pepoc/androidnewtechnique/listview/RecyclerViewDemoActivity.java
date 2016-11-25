@@ -14,18 +14,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pepoc.androidnewtechnique.R;
+import com.pepoc.androidnewtechnique.customview.ConstrictionView;
 
 public class RecyclerViewDemoActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewDemo;
     private AdapterDemo adapterDemo;
     private int count = 20;
+    private View ivTargetMove;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view_demo);
 
+        ivTargetMove = findViewById(R.id.iv_target_move);
         recyclerViewDemo = (RecyclerView) findViewById(R.id.recycler_view_demo);
 
         recyclerViewDemo.setLayoutManager(new LinearLayoutManager(this));
@@ -56,18 +59,35 @@ public class RecyclerViewDemoActivity extends AppCompatActivity {
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textView;
+        ConstrictionView constrictionView;
+        View ivTarget;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             textView = (TextView) itemView.findViewById(R.id.text_view);
+            constrictionView = (ConstrictionView) itemView.findViewById(R.id.constriction_view);
+            ivTarget = itemView.findViewById(R.id.iv_target);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    adapterDemo.notifyItemRemoved(getLayoutPosition());
 //                    adapterDemo.notifyItemInserted(3);
-                    executeAnimation(v, getLayoutPosition());
+
+
+//                    executeAnimation(v, getLayoutPosition());
+
+                    constrictionView.startAnimator();
+
+                    int[] locationTarget = new int[2];
+                    ivTarget.getLocationInWindow(locationTarget);
+
+                    int[] location= new int[2];
+                    ivTargetMove.getLocationInWindow(location);
+
+                    ivTargetMove.setTranslationX(locationTarget[0] - location[0]);
+                    ivTargetMove.setTranslationY(locationTarget[1] - location[1]);
                 }
             });
         }

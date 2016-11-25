@@ -87,7 +87,9 @@
         <activity android:name=".svg.SVGActivity" />
         <activity android:name=".customview.CanvasDemoActivity" />
         <activity android:name=".matrix.MatrixActivity" />
-        <activity android:name=".scroller.ScrollerActivity"></activity>
+        <activity android:name=".scroller.ScrollerActivity" />
+        <activity android:name=".widget.WidgetActivity" />
+        <activity android:name=".beziercurve.BezierCurveActivity"></activity>
     </application>
 
 </manifest>

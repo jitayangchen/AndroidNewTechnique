@@ -28,6 +28,14 @@ public class CanvasDemoActivity extends AppCompatActivity {
     private TextView seekBarValue3;
     private TextView seekBarValue4;
     private BgWaterRipple waterRipple;
+    private ImageView ivIcLauncher1;
+    private ImageView ivIcLauncher2;
+    private ImageView ivIcLauncher3;
+    private ImageView ivIcLauncher4;
+    private ImageView ivIcLauncher5;
+
+    private int count = 0;
+    private ConstrictionView constrictionView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +49,12 @@ public class CanvasDemoActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                canvasSimple.startAnimation();
-//            }
-//        }, 200);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                canvasSimple.startAnimation();
+            }
+        }, 200);
     }
 
     @Override
@@ -70,67 +78,24 @@ public class CanvasDemoActivity extends AppCompatActivity {
         seekBarValue4 = (TextView) findViewById(R.id.seek_bar_value_4);
 
 
-        final ImageView ivIcLauncher = (ImageView) findViewById(R.id.iv_ic_launcher);
 
-        final TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 0, 100);
-        translateAnimation.setDuration(800);
-        translateAnimation.setFillAfter(true);
+        ivIcLauncher1 = (ImageView) findViewById(R.id.iv_ic_launcher_1);
+        ivIcLauncher2 = (ImageView) findViewById(R.id.iv_ic_launcher_2);
+        ivIcLauncher3 = (ImageView) findViewById(R.id.iv_ic_launcher_3);
+        ivIcLauncher4 = (ImageView) findViewById(R.id.iv_ic_launcher_4);
+        ivIcLauncher5 = (ImageView) findViewById(R.id.iv_ic_launcher_5);
 
-        final Animation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        alphaAnimation.setDuration(800);
-        alphaAnimation.setFillAfter(true);
+        constrictionView = (ConstrictionView) findViewById(R.id.constriction_view);
 
-
-        final AnimationSet set = new AnimationSet(true);
-        set.addAnimation(translateAnimation);
-        set.addAnimation(alphaAnimation);
-        set.setFillAfter(true);
-
-
-
-        final TranslateAnimation translateAnimation1 = new TranslateAnimation(0, 0, 100, 200);
-        translateAnimation1.setDuration(800);
-        translateAnimation1.setFillAfter(true);
-
-        final Animation alphaAnimation1 = new AlphaAnimation(1.0f, 0.0f);
-        alphaAnimation1.setDuration(800);
-        alphaAnimation1.setFillAfter(true);
-
-        final AnimationSet set1 = new AnimationSet(true);
-        set1.setFillAfter(true);
-        set1.addAnimation(translateAnimation1);
-        set1.addAnimation(alphaAnimation1);
-
-
-        translateAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                ivIcLauncher.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        ivIcLauncher.startAnimation(set1);
-                        ivIcLauncher.setVisibility(View.INVISIBLE);
-
-                    }
-                }, 200);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
 
         findViewById(R.id.btn_start).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ivIcLauncher.startAnimation(set);
-                ivIcLauncher.setVisibility(View.VISIBLE);
+                executeAnimation(ivIcLauncher1, 150);
+                executeAnimation(ivIcLauncher2, 150 * 2);
+                executeAnimation(ivIcLauncher3, 150 * 3);
+                executeAnimation(ivIcLauncher4, 150 * 4);
+                executeAnimation(ivIcLauncher5, 150 * 5);
             }
         });
 
@@ -138,9 +103,11 @@ public class CanvasDemoActivity extends AppCompatActivity {
         findViewById(R.id.btn_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ivIcLauncher.startAnimation(translateAnimation1);
+//                ivIcLauncher1.startAnimation(translateAnimation1);
             }
         });
+
+
 
 
         seekBar1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -218,5 +185,100 @@ public class CanvasDemoActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void executeAnimation(final ImageView imageView, long delayMillis) {
+        final TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 0, 100);
+        translateAnimation.setDuration(400);
+        translateAnimation.setFillAfter(true);
+
+        final Animation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        alphaAnimation.setDuration(400);
+        alphaAnimation.setFillAfter(true);
+
+
+        final AnimationSet set = new AnimationSet(true);
+        set.addAnimation(translateAnimation);
+        set.addAnimation(alphaAnimation);
+        set.setFillAfter(true);
+
+
+
+        final TranslateAnimation translateAnimation1 = new TranslateAnimation(0, 0, 100, 200);
+        translateAnimation1.setDuration(400);
+        translateAnimation1.setFillAfter(true);
+
+        final Animation alphaAnimation1 = new AlphaAnimation(1.0f, 0.0f);
+        alphaAnimation1.setDuration(400);
+        alphaAnimation1.setFillAfter(true);
+
+        final AnimationSet set1 = new AnimationSet(true);
+        set1.setFillAfter(true);
+        set1.addAnimation(translateAnimation1);
+        set1.addAnimation(alphaAnimation1);
+
+
+        set.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                imageView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        imageView.startAnimation(set1);
+                        imageView.setVisibility(View.INVISIBLE);
+
+                    }
+                }, 400 * 5);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        set1.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                if (imageView == ivIcLauncher5) {
+
+                    if (count == 1) {
+                        constrictionView.startAnimator();
+                    } else {
+
+                        executeAnimation(ivIcLauncher1, 150);
+                        executeAnimation(ivIcLauncher2, 150 * 2);
+                        executeAnimation(ivIcLauncher3, 150 * 3);
+                        executeAnimation(ivIcLauncher4, 150 * 4);
+                        executeAnimation(ivIcLauncher5, 150 * 5);
+                    }
+
+                    count++;
+                }
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        imageView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                imageView.startAnimation(set);
+                imageView.setVisibility(View.VISIBLE);
+            }
+        }, delayMillis);
     }
 }

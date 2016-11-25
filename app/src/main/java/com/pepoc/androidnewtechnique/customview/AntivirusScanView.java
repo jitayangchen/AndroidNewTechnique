@@ -15,9 +15,11 @@ import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Interpolator;
 
 import com.pepoc.androidnewtechnique.R;
-import com.pepoc.androidnewtechnique.log.LogManager;
+
+import java.util.Random;
 
 /**
  * @author Arlenyang
@@ -38,8 +40,10 @@ public class AntivirusScanView extends View {
 //    private int left = -1;
 //    private int top = 100;
     private int viewWidth, viewHeight;
+    private int lastRandom = 0;
 
     private Bitmap[] virusArr = new Bitmap[4];
+    private Random random;
 
 
     public AntivirusScanView(Context context) {
@@ -80,6 +84,9 @@ public class AntivirusScanView extends View {
     }
 
     private void init() {
+
+        random = new Random();
+
         path = new Path();
         pathContent = new Path();
 
@@ -94,17 +101,24 @@ public class AntivirusScanView extends View {
         paintContent.setAntiAlias(true);
         paintContent.setStyle(Paint.Style.FILL);
 
-        bmScanningVirus1 = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.antivirus_scanning_virus_1);
-        bmScanningVirus2 = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.antivirus_scanning_virus_2);
-        bmScanningVirus3 = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.antivirus_scanning_virus_3);
-        bmScanningVirus4 = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.antivirus_scanning_virus_4);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+
+        bmScanningVirus1 = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.antivirus_scanning_virus_1, options);
+        bmScanningVirus2 = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.antivirus_scanning_virus_2, options);
+        bmScanningVirus3 = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.antivirus_scanning_virus_3, options);
+        bmScanningVirus4 = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.antivirus_scanning_virus_4, options);
         virusArr[0] = bmScanningVirus1;
         virusArr[1] = bmScanningVirus2;
         virusArr[2] = bmScanningVirus3;
         virusArr[3] = bmScanningVirus4;
 
-        bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.privacy_scanning_shield);
-        lineBitmap = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.line);
+//        bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.privacy_scanning_shield, options);
+        bitmap = BitmapFactory.decodeStream(getContext().getResources().openRawResource(R.mipmap.privacy_scanning_shield), null, null);
+
+        options.outWidth = bitmap.getWidth();
+        options.outHeight = bitmap.getHeight();
+        lineBitmap = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.line, options);
 
         viewWidth = lineBitmap.getWidth();
         viewHeight = viewWidth;
@@ -112,18 +126,18 @@ public class AntivirusScanView extends View {
         porterDuffXfermode = new PorterDuffXfermode(PorterDuff.Mode.CLEAR);
 
 
-        valueAnimator = ValueAnimator.ofFloat(0, 1);
-        valueAnimator.setDuration(1000);
+        valueAnimator = ValueAnimator.ofFloat(0, 1, 0);
+        valueAnimator.setDuration(2600);
         valueAnimator.setRepeatCount(-1);
         valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
-//        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.setInterpolator(new MyInterpolator());
 //        valueAnimator.setEvaluator(new MyTypeEvaluator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (Float) animation.getAnimatedValue();
                 lineTop = bitmap.getHeight() - bitmap.getHeight() * value + (getHeight() - bitmap.getHeight()) / 2;
-                LogManager.i("value === " + value + " --- lineTop === " + lineTop);
+//                LogManager.i("value === " + value + " --- lineTop === " + lineTop);
                 invalidate();
             }
         });
@@ -140,8 +154,11 @@ public class AntivirusScanView extends View {
                 super.onAnimationRepeat(animation);
                 Log.i("YYY", "--------------onAnimationRepeat---------------");
 
-//                Random random = new Random();
-//                random.nextInt(4);
+                int i;
+                do {
+                    i = random.nextInt(4);
+                } while (i == lastRandom);
+                lastRandom = i;
             }
 
             @Override
@@ -220,17 +237,16 @@ public class AntivirusScanView extends View {
 //        //最后将画笔去除Xfermode
 //        paint.setXfermode(null);
 
-
-        canvas.drawBitmap(bmScanningVirus1, (getWidth() - bmScanningVirus1.getWidth()) / 2, (getHeight() - bmScanningVirus1.getHeight()) / 2, null);
+        Bitmap bitmapVirus = virusArr[lastRandom];
+        canvas.drawBitmap(bitmapVirus, (getWidth() - bitmapVirus.getWidth()) / 2, (getHeight() - bitmapVirus.getHeight()) / 2, null);
 
             int canvasWidth = canvas.getWidth();
             int canvasHeight = canvas.getHeight();
             int layerId = canvas.saveLayer(0, 0, canvasWidth, canvasHeight, null, Canvas.ALL_SAVE_FLAG);
 
-            canvas.drawBitmap(bitmap, (getWidth() - bitmap.getWidth()) / 2, (getHeight() - bitmap.getHeight()) / 2, paint);
+            canvas.drawBitmap(bitmap, (getWidth() - bitmap.getWidth()) / 2, (getHeight() - bitmap.getHeight()) / 2, null);
 
             paint.setColor(Color.WHITE);
-            canvas.drawBitmap(lineBitmap, (getWidth() - lineBitmap.getWidth()) / 2, lineTop - lineBitmap.getHeight(), null);
 
             paint.setXfermode(porterDuffXfermode);
 
@@ -241,5 +257,17 @@ public class AntivirusScanView extends View {
             paint.setXfermode(null);
 
         canvas.restoreToCount(layerId);
+            canvas.drawBitmap(lineBitmap, (getWidth() - lineBitmap.getWidth()) / 2, lineTop - (lineBitmap.getHeight() / 2), null);
+    }
+
+    class MyInterpolator implements Interpolator {
+        @Override
+        public float getInterpolation(float input) {
+            if (input < 0.5f) {
+                return ((float) (Math.cos((input * 2 + 1) * Math.PI) / 2.0f) + 0.5f) / 2.0f;
+            } else {
+                return ((float) (Math.cos(((1 - input) * 2 + 1) * Math.PI) / 2.0f) + 0.5f) / 2.0f;
+            }
+        }
     }
 }

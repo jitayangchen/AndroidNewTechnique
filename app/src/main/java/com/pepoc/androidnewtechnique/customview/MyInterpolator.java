@@ -11,7 +11,10 @@ import android.view.animation.Interpolator;
 public class MyInterpolator implements Interpolator {
     @Override
     public float getInterpolation(float input) {
-//        LogManager.i("input === " + input);
-        return input * 2;
+        if (input < 0.5f) {
+            return ((float) (Math.cos((input * 2 + 1) * Math.PI) / 2.0f) + 0.5f) / 2.0f;
+        } else {
+            return ((float) (Math.cos(((1 - input) * 2 + 1) * Math.PI) / 2.0f) + 0.5f) / 2.0f;
+        }
     }
 }
