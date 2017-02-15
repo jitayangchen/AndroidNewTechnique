@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="guide_page_image_padding_top">50dp</dimen>
+
+    <dimen name="guide_page_center_image_w">225dp</dimen>
+    <dimen name="guide_page_center_image_h">337dp</dimen>
+
+    <dimen name="guide_page_image_margin">40dp</dimen>
+
+    <dimen name="antivirus_scan_view_shield_width">154dp</dimen>
+    <dimen name="antivirus_scan_view_shield_height">171dp</dimen>
+</resources>

@@ -14,6 +14,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.pepoc.androidnewtechnique.R;
+import com.pepoc.androidnewtechnique.customview.copy.AntivirusScanView;
 
 public class CanvasDemoActivity extends AppCompatActivity {
 
@@ -61,7 +62,7 @@ public class CanvasDemoActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        canvasSimple.cancelAnimation();
+//        canvasSimple.cancelAnimation();
     }
 
     private void init() {

@@ -27,7 +27,7 @@ import java.util.Random;
  * @date 2016/11/8 10:25
  * @copyright TCL-MIG
  */
-public class AntivirusScanView extends View {
+public class AntivirusScanView_copy extends View {
 
     private Path path, pathContent;
     private Paint paint, paintContent;
@@ -46,17 +46,17 @@ public class AntivirusScanView extends View {
     private Random random;
 
 
-    public AntivirusScanView(Context context) {
+    public AntivirusScanView_copy(Context context) {
         super(context);
         init();
     }
 
-    public AntivirusScanView(Context context, AttributeSet attrs) {
+    public AntivirusScanView_copy(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public AntivirusScanView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AntivirusScanView_copy(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }

@@ -163,37 +163,37 @@ public class BezierCurveView extends View {
         currentPoint.bottom = y + rectSize;
     }
 
-    public double[] getStartPoint() {
-        double[] point = new double[2];
-        double startLeft = startPoint.left;
-        double startBottom = getHeight() - startPoint.top;
+    public float[] getStartPoint() {
+        float[] point = new float[2];
+        float startLeft = startPoint.left;
+        float startBottom = getHeight() - startPoint.top;
         point[0] = startLeft;
         point[1] = startBottom;
         return point;
     }
 
-    public double[] getFirstPoint() {
-        double[] point = new double[2];
-        double firstLeft = firstPoint.left + rectSize / 2;
-        double firstBottom = getHeight() - firstPoint.top + rectSize / 2;
+    public float[] getFirstPoint() {
+        float[] point = new float[2];
+        float firstLeft = firstPoint.left + rectSize / 2;
+        float firstBottom = getHeight() - (firstPoint.top + rectSize / 2);
         point[0] = firstLeft;
         point[1] = firstBottom;
         return point;
     }
 
-    public double[] getSecondPoint() {
-        double[] point = new double[2];
-        double secondLeft = secondPoint.left + rectSize / 2;
-        double secondBottom = getHeight() - secondPoint.top + rectSize / 2;
+    public float[] getSecondPoint() {
+        float[] point = new float[2];
+        float secondLeft = secondPoint.left + rectSize / 2;
+        float secondBottom = getHeight() - (secondPoint.top + rectSize / 2);
         point[0] = secondLeft;
         point[1] = secondBottom;
         return point;
     }
 
-    public double[] getEndPoint() {
-        double[] point = new double[2];
-        double endLeft = endPoint.right;
-        double endBottom = getHeight() - endPoint.top;
+    public float[] getEndPoint() {
+        float[] point = new float[2];
+        float endLeft = endPoint.right;
+        float endBottom = getHeight() - endPoint.top;
         point[0] = endLeft;
         point[1] = endBottom;
         return point;

@@ -11,10 +11,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.pepoc.androidnewtechnique.customview.AntivirusScanView
+        <com.pepoc.androidnewtechnique.customview.copy.AntivirusScanView
             android:id="@+id/canvas_simple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:visibility="visible" />
 
         <Button

@@ -27,12 +27,12 @@ public class WaterRipple extends View {
     private final static PointD endPoint1 = new PointD(1.0d, 0.12671529d);
 
 //    startPoint = 0.0 --- 0.25471446139753356
-//    firstPoint = 0.34817576938205297 --- 0.2030615688355501
-//    secondPoint = 0.5728636847601997 --- -0.2201615010411286
+//    firstPoint = 0.3412409464518229 --- 0.30636735395951703
+//    secondPoint = 0.5881203121609158 --- -0.11479123958871384
 //    endPoint = 1.0 --- 0.040006148913675106
     private final static PointD startPoint2 = new PointD(0.0d, 0.25471446139753356d);
-    private final static PointD firstPoint2 = new PointD(0.34817576938205297d, 0.2030615688355501d);
-    private final static PointD secondPoint2 = new PointD(0.5728636847601997d, -0.2201615010411286d);
+    private final static PointD firstPoint2 = new PointD(0.3412409464518229d, 0.30636735395951703d);
+    private final static PointD secondPoint2 = new PointD(0.5881203121609158d, -0.11479123958871384d);
     private final static PointD endPoint2 = new PointD(1.0d, 0.040006148913675106d);
 
 //    startPoint = 0.0 --- 0.24645643
@@ -89,27 +89,13 @@ public class WaterRipple extends View {
         paintBezierCurve.setColor(Color.parseColor("#332c48ff"));
         canvas.drawPath(pathBezierCurve1, paintBezierCurve);
 
-//        pathBezierCurve2.moveTo((float) (startPoint2.x * getWidth()), (float) (startPoint2.y * getHeight()));
-//        pathBezierCurve2.cubicTo((float) (firstPoint2.x * getWidth()), (float) (firstPoint2.y * getHeight()), (float) (secondPoint2.x * getWidth()), (float) (secondPoint2.y * getHeight()), (float) (endPoint2.x * getWidth()), (float) (endPoint2.y * getHeight()));
-//        pathBezierCurve2.lineTo(getWidth(), getHeight());
-//        pathBezierCurve2.lineTo(0, getHeight());
-//        pathBezierCurve2.close();
-//        paintBezierCurve.setColor(Color.parseColor("#33125eff"));
-//        canvas.drawPath(pathBezierCurve2, paintBezierCurve);
-
-
-//        startPoint = 0.0 --- 124.281005859375
-//        firstPoint = 249.6879425048828 --- 101.27947998046875
-//        secondPoint = 395.4854431152344 --- -103.56048583984375
-//        endPoint = 720.0 --- 18.36376953125
-        pathBezierCurve2.moveTo(0f, 124.281005859375f);
-        pathBezierCurve2.cubicTo(249.6879425048828f, 101.27947998046875f, 395.4854431152344f, -103.56048583984375f, 720.0f, 18.36376953125f);
+        pathBezierCurve2.moveTo((float) (startPoint2.x * getWidth()), (float) (startPoint2.y * getHeight()));
+        pathBezierCurve2.cubicTo((float) (firstPoint2.x * getWidth()), (float) (firstPoint2.y * getHeight()), (float) (secondPoint2.x * getWidth()), (float) (secondPoint2.y * getHeight()), (float) (endPoint2.x * getWidth()), (float) (endPoint2.y * getHeight()));
         pathBezierCurve2.lineTo(getWidth(), getHeight());
         pathBezierCurve2.lineTo(0, getHeight());
         pathBezierCurve2.close();
         paintBezierCurve.setColor(Color.parseColor("#33125eff"));
         canvas.drawPath(pathBezierCurve2, paintBezierCurve);
-
 
         pathBezierCurve3.moveTo((float) (startPoint3.x * getWidth()), (float) (startPoint3.y * getHeight()));
         pathBezierCurve3.cubicTo((float) (firstPoint3.x * getWidth()), (float) (firstPoint3.y * getHeight()), (float) (secondPoint3.x * getWidth()), (float) (secondPoint3.y * getHeight()), (float) (endPoint3.x * getWidth()), (float) (endPoint3.y * getHeight()));

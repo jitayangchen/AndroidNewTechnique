@@ -31,23 +31,23 @@ public class BezierCurveActivity extends AppCompatActivity {
         btnRecordData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double[] startPoint = bezierCurveView.getStartPoint();
-                double[] firstPoint = bezierCurveView.getFirstPoint();
-                double[] secondPoint = bezierCurveView.getSecondPoint();
-                double[] endPoint = bezierCurveView.getEndPoint();
+                float[] startPoint = bezierCurveView.getStartPoint();
+                float[] firstPoint = bezierCurveView.getFirstPoint();
+                float[] secondPoint = bezierCurveView.getSecondPoint();
+                float[] endPoint = bezierCurveView.getEndPoint();
 
-                double imageViewW = ivTest.getWidth();
-                double imageViewH = ivTest.getHeight();
+                float imageViewW = ivTest.getWidth();
+                float imageViewH = ivTest.getHeight();
 
-//                LogManager.i("startPoint = " + (startPoint[0] / imageViewW) + " --- " + ((imageViewH - startPoint[1]) / imageViewH));
-//                LogManager.i("firstPoint = " + (firstPoint[0] / imageViewW) + " --- " + ((imageViewH - firstPoint[1]) / imageViewH));
-//                LogManager.i("secondPoint = " + (secondPoint[0] / imageViewW) + " --- " + ((imageViewH - secondPoint[1]) / imageViewH));
-//                LogManager.i("endPoint = " + (endPoint[0] / imageViewW) + " --- " + ((imageViewH - endPoint[1]) / imageViewH));
+                LogManager.i("startPoint = " + (startPoint[0] / imageViewW) + " --- " + ((imageViewH - startPoint[1]) / imageViewH));
+                LogManager.i("firstPoint = " + (firstPoint[0] / imageViewW) + " --- " + ((imageViewH - firstPoint[1]) / imageViewH));
+                LogManager.i("secondPoint = " + (secondPoint[0] / imageViewW) + " --- " + ((imageViewH - secondPoint[1]) / imageViewH));
+                LogManager.i("endPoint = " + (endPoint[0] / imageViewW) + " --- " + ((imageViewH - endPoint[1]) / imageViewH));
 
-                LogManager.i("startPoint = " + (startPoint[0]) + " --- " + (imageViewH - startPoint[1]));
-                LogManager.i("firstPoint = " + (firstPoint[0]) + " --- " + (imageViewH - firstPoint[1]));
-                LogManager.i("secondPoint = " + (secondPoint[0]) + " --- " + (imageViewH - secondPoint[1]));
-                LogManager.i("endPoint = " + (endPoint[0]) + " --- " + (imageViewH - endPoint[1]));
+//                LogManager.i("startPoint = " + (startPoint[0]) + " --- " + (imageViewH - startPoint[1]));
+//                LogManager.i("firstPoint = " + (firstPoint[0]) + " --- " + (imageViewH - firstPoint[1]));
+//                LogManager.i("secondPoint = " + (secondPoint[0]) + " --- " + (imageViewH - secondPoint[1]));
+//                LogManager.i("endPoint = " + (endPoint[0]) + " --- " + (imageViewH - endPoint[1]));
             }
         });
     }

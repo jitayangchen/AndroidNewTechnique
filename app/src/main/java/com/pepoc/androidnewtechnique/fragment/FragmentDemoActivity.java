@@ -20,7 +20,7 @@ public class FragmentDemoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fragment_demo);
         LogManager.i("----------------onCreate-----------------");
         init();
-//        finish();
+        finish();
     }
 
     private void init() {

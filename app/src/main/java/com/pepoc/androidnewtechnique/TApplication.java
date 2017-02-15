@@ -2,6 +2,10 @@ package com.pepoc.androidnewtechnique;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Environment;
 
@@ -10,6 +14,7 @@ import com.orhanobut.logger.AndroidLogTool;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 import com.pepoc.androidnewtechnique.log.LogManager;
+import com.pepoc.androidnewtechnique.util.HomeListenerHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +23,8 @@ import java.io.IOException;
  * Created by yangchen on 16-1-12.
  */
 public class TApplication extends Application implements Application.ActivityLifecycleCallbacks {
+
+    public static String CONFIG = "default";
 
     @Override
     public void onCreate() {
@@ -29,6 +36,8 @@ public class TApplication extends Application implements Application.ActivityLif
 //        registerActivityLifecycleCallbacks(this);
 
         LogManager.i("------------onCreate()----------- Pid = " + android.os.Process.myPid());
+
+        registerHomeReceiver();
     }
 
     private void initLogger() {
@@ -94,5 +103,27 @@ public class TApplication extends Application implements Application.ActivityLif
     @Override
     public void onActivityDestroyed(Activity activity) {
         LogManager.i("------------------onActivityDestroyed--------------------");
+    }
+
+    private void registerHomeReceiver() {
+        BroadcastReceiver mObserver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if(Intent.ACTION_CLOSE_SYSTEM_DIALOGS.equals(action)){
+                    String reason = intent.getStringExtra("reason");
+                    if(HomeListenerHelper.KEY_HOME.equals(reason)) {
+                        //监听home键
+                        HomeListenerHelper.getInstance().onHomeClick(HomeListenerHelper.KEY_HOME);
+                    } else if (HomeListenerHelper.KEY_HOME_RECENT_APPS.equals(reason)) {
+                        //历史记录
+                        HomeListenerHelper.getInstance().onHomeClick(HomeListenerHelper.KEY_HOME_RECENT_APPS);
+                    }
+                }
+            }
+        };
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+        registerReceiver(mObserver, filter);
     }
 }

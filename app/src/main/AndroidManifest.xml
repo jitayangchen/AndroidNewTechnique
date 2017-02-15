@@ -66,7 +66,8 @@
         <service
             android:name=".services.ServicesDemo"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"
+            android:process="com.pepoc.ServiceDemo" />
 
         <activity
             android:name=".okhttp.OkHttpActivity"
@@ -89,7 +90,13 @@
         <activity android:name=".matrix.MatrixActivity" />
         <activity android:name=".scroller.ScrollerActivity" />
         <activity android:name=".widget.WidgetActivity" />
-        <activity android:name=".beziercurve.BezierCurveActivity"></activity>
+        <activity android:name=".beziercurve.BezierCurveActivity" />
+        <activity android:name=".AppIsBackground.AppGroundActivity" />
+        <activity android:name=".file.FileActivity" />
+        <activity android:name=".collection.BlockingQueueActivity" />
+        <activity android:name=".java.JavaBaseActivity" />
+        <activity android:name=".viewstub.ViewStubDemoActivity" />
+        <activity android:name=".androidbase.RotateActivity"></activity>
     </application>
 
 </manifest>

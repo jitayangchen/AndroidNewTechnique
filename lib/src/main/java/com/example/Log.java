@@ -5,6 +5,8 @@ package com.example;
  */
 public class Log {
 
+    public static String str = "djdk";
+
     public static void i(String msg) {
         System.out.println(msg);
     }

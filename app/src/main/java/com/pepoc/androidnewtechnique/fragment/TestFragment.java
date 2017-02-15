@@ -1,6 +1,7 @@
 package com.pepoc.androidnewtechnique.fragment;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -96,6 +97,12 @@ public class TestFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         LogManager.i("----------------onDetach-----------------");
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        LogManager.i("---------------onConfigurationChanged---------------");
     }
 
 }
