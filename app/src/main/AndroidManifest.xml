@@ -83,7 +83,9 @@
             android:name=".process.ProcessDemoActivity"
             android:process=":newProcess" />
         <activity android:name=".bitmap.BitmapDemoActivity" />
-        <activity android:name=".listview.RecyclerViewDemoActivity"></activity>
+        <activity android:name=".listview.RecyclerViewDemoActivity" />
+        <activity android:name=".textview.TextViewDemoActivity" />
+        <activity android:name=".revealeffect.RevealEffectActivity"></activity>
     </application>
 
 </manifest>

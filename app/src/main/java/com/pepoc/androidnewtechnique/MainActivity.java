@@ -28,6 +28,7 @@ import com.pepoc.androidnewtechnique.rxbus.RxBusActivity;
 import com.pepoc.androidnewtechnique.rxjava.RxJavaActivity;
 import com.pepoc.androidnewtechnique.services.ServiceDemoActivity;
 import com.pepoc.androidnewtechnique.sqlite.SqliteDemoActivity;
+import com.pepoc.androidnewtechnique.textview.TextViewDemoActivity;
 import com.pepoc.androidnewtechnique.threadpool.ThreadPollDemoActivity;
 import com.pepoc.androidnewtechnique.touchevent.TouchEventDemoActivity;
 
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         classList.add(FragmentDemoActivity.class);
         classList.add(ProcessDemoActivity.class);
         classList.add(RecyclerViewDemoActivity.class);
+        classList.add(TextViewDemoActivity.class);
         return classList;
     }
 
