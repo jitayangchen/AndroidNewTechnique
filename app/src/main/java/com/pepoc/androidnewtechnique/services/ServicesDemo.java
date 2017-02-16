@@ -2,6 +2,7 @@ package com.pepoc.androidnewtechnique.services;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
@@ -12,9 +13,13 @@ import com.pepoc.androidnewtechnique.log.LogManager;
  */
 public class ServicesDemo extends Service {
 
+    private final IBinder mBinder = new LocalBinder();
+
     @Override
     public void onCreate() {
         LogManager.i("----------onCreate---------");
+
+        LogManager.i("------------ServicesDemo----------- Pid = " + android.os.Process.myPid());
         super.onCreate();
     }
 
@@ -28,7 +33,7 @@ public class ServicesDemo extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         LogManager.i("----------onBind---------");
-        return null;
+        return mBinder;
     }
 
     @Override
@@ -41,5 +46,15 @@ public class ServicesDemo extends Service {
     public void onDestroy() {
         LogManager.i("----------onDestroy---------");
         super.onDestroy();
+    }
+
+    public class LocalBinder extends Binder {
+        public ServicesDemo getService() {
+            return ServicesDemo.this;
+        }
+    }
+
+    public void print() {
+        LogManager.i("Test Bind Service");
     }
 }

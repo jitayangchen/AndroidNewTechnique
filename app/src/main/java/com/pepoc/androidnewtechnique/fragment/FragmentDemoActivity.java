@@ -4,6 +4,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,6 +20,7 @@ public class FragmentDemoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fragment_demo);
         LogManager.i("----------------onCreate-----------------");
         init();
+        finish();
     }
 
     private void init() {
@@ -88,5 +91,15 @@ public class FragmentDemoActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         LogManager.i("---------------onConfigurationChanged---------------");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 }

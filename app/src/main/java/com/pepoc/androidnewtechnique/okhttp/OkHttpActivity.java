@@ -51,7 +51,7 @@ public class OkHttpActivity extends AppCompatActivity {
 
     public void getRequest() {
         Request request = new Request.Builder()
-                .url("http://www.pepoc.com/programmerjoke/getjokes.php?page=1&userId=-1")
+                .url("http://www.findfine.com.cn/programmerjoke/getjokes.php?page=1&userId=-1")
                 .build();
 
         Response response = null;

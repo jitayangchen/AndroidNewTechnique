@@ -4,17 +4,25 @@
     android:id="@+id/activity_recycler_view_demo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
     tools:context="com.pepoc.androidnewtechnique.listview.RecyclerViewDemoActivity">
 
-    <com.pepoc.androidnewtechnique.listview.SlideView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white">
+    <!--<com.pepoc.androidnewtechnique.listview.SlideView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@android:color/white">-->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_demo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-    </com.pepoc.androidnewtechnique.listview.SlideView>
+    <!--</com.pepoc.androidnewtechnique.listview.SlideView>-->
+
+
+    <ImageView
+        android:id="@+id/iv_target_move"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_launcher"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible"/>
 </RelativeLayout>
