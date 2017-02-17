@@ -41,6 +41,7 @@ import com.pepoc.androidnewtechnique.scroller.ScrollerActivity;
 import com.pepoc.androidnewtechnique.services.ServiceDemoActivity;
 import com.pepoc.androidnewtechnique.sqlite.SqliteDemoActivity;
 import com.pepoc.androidnewtechnique.svg.SVGActivity;
+import com.pepoc.androidnewtechnique.textview.TextViewDemoActivity;
 import com.pepoc.androidnewtechnique.threadpool.ThreadPollDemoActivity;
 import com.pepoc.androidnewtechnique.touchevent.TouchEventDemoActivity;
 import com.pepoc.androidnewtechnique.util.HomeListenerHelper;
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         classList.add(FragmentDemoActivity.class);
         classList.add(ProcessDemoActivity.class);
         classList.add(RecyclerViewDemoActivity.class);
+        classList.add(TextViewDemoActivity.class);
         classList.add(SVGActivity.class);
         return classList;
     }
