@@ -5,6 +5,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
 
     <application
         android:name=".TApplication"
@@ -68,6 +72,31 @@
             android:enabled="true"
             android:exported="true"
             android:process="com.pepoc.ServiceDemo" />
+        <service android:name=".services.accessibilityservice.MyAccessibilityService">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_config" />
+        </service>
+
+        <service android:name=".services.notification.MyNotificationListenerService"
+            android:label="MyNotificationListenerService"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <service android:name=".screenlocker.ScreenLockService"></service>
+
+        <receiver android:name=".broadcastreceiver.MyBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.pepoc.androidnewtechnique.MY_BROADCAST" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".okhttp.OkHttpActivity"
@@ -86,7 +115,7 @@
         <activity android:name=".bitmap.BitmapDemoActivity" />
         <activity android:name=".listview.RecyclerViewDemoActivity" />
         <activity android:name=".textview.TextViewDemoActivity" />
-        <activity android:name=".revealeffect.RevealEffectActivity"></activity>
+        <activity android:name=".revealeffect.RevealEffectActivity" />
         <activity android:name=".svg.SVGActivity" />
         <activity android:name=".customview.CanvasDemoActivity" />
         <activity android:name=".matrix.MatrixActivity" />
@@ -98,7 +127,10 @@
         <activity android:name=".collection.BlockingQueueActivity" />
         <activity android:name=".java.JavaBaseActivity" />
         <activity android:name=".viewstub.ViewStubDemoActivity" />
-        <activity android:name=".androidbase.RotateActivity"></activity>
+        <activity android:name=".androidbase.RotateActivity" />
+        <activity android:name=".services.accessibilityservice.MyAccessibilityServiceActivity" />
+        <activity android:name=".screenlocker.ScreenLockerActivity" />
+        <activity android:name=".services.notification.NotificationListenerActivity"></activity>
     </application>
 
 </manifest>

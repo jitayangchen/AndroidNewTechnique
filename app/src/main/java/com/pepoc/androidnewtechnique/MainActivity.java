@@ -37,8 +37,10 @@ import com.pepoc.androidnewtechnique.realm.RealmActivity;
 import com.pepoc.androidnewtechnique.rxbinding.RxBindingActivity;
 import com.pepoc.androidnewtechnique.rxbus.RxBusActivity;
 import com.pepoc.androidnewtechnique.rxjava.RxJavaActivity;
+import com.pepoc.androidnewtechnique.screenlocker.ScreenLockerActivity;
 import com.pepoc.androidnewtechnique.scroller.ScrollerActivity;
 import com.pepoc.androidnewtechnique.services.ServiceDemoActivity;
+import com.pepoc.androidnewtechnique.services.notification.NotificationListenerActivity;
 import com.pepoc.androidnewtechnique.sqlite.SqliteDemoActivity;
 import com.pepoc.androidnewtechnique.svg.SVGActivity;
 import com.pepoc.androidnewtechnique.textview.TextViewDemoActivity;
@@ -99,7 +101,9 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Class<? extends Activity>> getData() {
         List<Class<? extends Activity>> classList = new ArrayList<>();
-        classList.add(RotateActivity .class);
+        classList.add(NotificationListenerActivity.class);
+        classList.add(ScreenLockerActivity.class);
+        classList.add(RotateActivity.class);
         classList.add(ViewStubDemoActivity.class);
         classList.add(JavaBaseActivity.class);
         classList.add(BlockingQueueActivity.class);

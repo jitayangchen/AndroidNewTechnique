@@ -3,9 +3,11 @@ package com.pepoc.androidnewtechnique;
 import android.app.Activity;
 import android.app.Application;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 
@@ -14,6 +16,7 @@ import com.orhanobut.logger.AndroidLogTool;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 import com.pepoc.androidnewtechnique.log.LogManager;
+import com.pepoc.androidnewtechnique.services.notification.MyNotificationListenerService;
 import com.pepoc.androidnewtechnique.util.HomeListenerHelper;
 
 import java.io.File;
@@ -25,11 +28,12 @@ import java.io.IOException;
 public class TApplication extends Application implements Application.ActivityLifecycleCallbacks {
 
     public static String CONFIG = "default";
+    private static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
+        context = this;
         initLogger();
         initAndFix();
 
@@ -38,6 +42,12 @@ public class TApplication extends Application implements Application.ActivityLif
         LogManager.i("------------onCreate()----------- Pid = " + android.os.Process.myPid());
 
         registerHomeReceiver();
+
+//        toggleNotificationListenerService();
+    }
+
+    public static Context getContext() {
+        return context;
     }
 
     private void initLogger() {
@@ -125,5 +135,15 @@ public class TApplication extends Application implements Application.ActivityLif
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
         registerReceiver(mObserver, filter);
+    }
+
+    private void toggleNotificationListenerService() {
+        PackageManager pm = getPackageManager();
+        pm.setComponentEnabledSetting(new ComponentName(this, MyNotificationListenerService.class),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+
+        pm.setComponentEnabledSetting(new ComponentName(this, MyNotificationListenerService.class),
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+
     }
 }
