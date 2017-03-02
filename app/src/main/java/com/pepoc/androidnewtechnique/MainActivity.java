@@ -22,6 +22,7 @@ import com.pepoc.androidnewtechnique.beziercurve.BezierCurveActivity;
 import com.pepoc.androidnewtechnique.bitmap.BitmapDemoActivity;
 import com.pepoc.androidnewtechnique.collection.BlockingQueueActivity;
 import com.pepoc.androidnewtechnique.customview.CanvasDemoActivity;
+import com.pepoc.androidnewtechnique.customview.SlideViewActivity;
 import com.pepoc.androidnewtechnique.eventbus.EventBusActivity;
 import com.pepoc.androidnewtechnique.file.FileActivity;
 import com.pepoc.androidnewtechnique.fragment.FragmentDemoActivity;
@@ -99,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Class<? extends Activity>> getData() {
         List<Class<? extends Activity>> classList = new ArrayList<>();
-        classList.add(RotateActivity .class);
+        classList.add(SlideViewActivity.class);
+        classList.add(RotateActivity.class);
         classList.add(ViewStubDemoActivity.class);
         classList.add(JavaBaseActivity.class);
         classList.add(BlockingQueueActivity.class);

@@ -86,7 +86,7 @@
         <activity android:name=".bitmap.BitmapDemoActivity" />
         <activity android:name=".listview.RecyclerViewDemoActivity" />
         <activity android:name=".textview.TextViewDemoActivity" />
-        <activity android:name=".revealeffect.RevealEffectActivity"></activity>
+        <activity android:name=".revealeffect.RevealEffectActivity" />
         <activity android:name=".svg.SVGActivity" />
         <activity android:name=".customview.CanvasDemoActivity" />
         <activity android:name=".matrix.MatrixActivity" />
@@ -98,7 +98,8 @@
         <activity android:name=".collection.BlockingQueueActivity" />
         <activity android:name=".java.JavaBaseActivity" />
         <activity android:name=".viewstub.ViewStubDemoActivity" />
-        <activity android:name=".androidbase.RotateActivity"></activity>
+        <activity android:name=".androidbase.RotateActivity" />
+        <activity android:name=".customview.SlideViewActivity"></activity>
     </application>
 
 </manifest>
