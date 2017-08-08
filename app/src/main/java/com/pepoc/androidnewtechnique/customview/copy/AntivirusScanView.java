@@ -17,9 +17,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 
 import com.pepoc.androidnewtechnique.R;
-import com.pepoc.androidnewtechnique.matrix.Virus;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -137,6 +135,12 @@ public class AntivirusScanView extends View {
                 lineRectF.left = shieldRectF.left - (shieldRectF.left * value);
                 lineRectF.right = shieldRectF.right + (getWidth() - shieldRectF.right) * value;
                 invalidate();
+
+                try {
+                    throw new Exception("Call Stack Trace");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 

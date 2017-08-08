@@ -76,6 +76,6 @@ public class NotificationMsgItemView extends RelativeLayout {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         gestureDetector.onTouchEvent(event);
-        return super.onTouchEvent(event);
+        return true;
     }
 }

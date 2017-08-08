@@ -49,6 +49,11 @@ public class HandlerDemoActivity extends AppCompatActivity {
         LogManager.i(mTail);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     private void init() {
         btnTest = (Button) findViewById(R.id.btn_test);
         btnTest.setOnClickListener(new View.OnClickListener() {

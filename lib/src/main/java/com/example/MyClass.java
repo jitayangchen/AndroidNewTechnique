@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.Calendar;
+
 public class MyClass {
 
     private static int num = 0;
@@ -21,14 +23,25 @@ public class MyClass {
 //        String lala = (String) null;
 //        Log.i("lala === " + lala);
 
-        MyThread myThread = new MyThread();
-        myThread.start();
-        try {
-            myThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Log.i("num === " + num);
+
+
+//        MyThread myThread = new MyThread();
+//        myThread.start();
+//        try {
+//            myThread.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        Log.i("num === " + num);
+
+
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String format = formatter.format(getDayStartTime());
+//        Log.i(format);
+
+        Log.i("== " + ("YYY" == "YYY"));
+        Log.i("== " + "YYY".hashCode());
+        Log.i("== " + ("YYY" == "YYY"));
     }
 
     static class MyThread extends Thread {
@@ -45,5 +58,14 @@ public class MyClass {
 
     private static String getStr() {
         return null;
+    }
+
+    public static Long getDayStartTime() {
+        Calendar todayStart = Calendar.getInstance();
+        todayStart.set(Calendar.HOUR_OF_DAY, 0);
+        todayStart.set(Calendar.MINUTE, 0);
+        todayStart.set(Calendar.SECOND, 0);
+        todayStart.set(Calendar.MILLISECOND, 0);
+        return todayStart.getTime().getTime();
     }
 }

@@ -83,11 +83,28 @@ public class FileActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                getRoot("chmod 777 " + path);
 //                getRoot("rm -f " + path);
-                getRoot("id");
+//                getRoot("id");
 
 //                for (int i = 0; i < 50; i++) {
 ////                    getRoot("cp /data/anr/zzz/traces.txt /data/anr/traces.txt" + i);
 //                    getRoot("rm -f " + path + i);
+//                }
+
+                execute();
+            }
+        });
+
+
+        findViewById(R.id.btn_create_file).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/ZZZCCChahaha.txt");
+//                LogManager.i(file.getAbsolutePath());
+//                try {
+//                    boolean success = file.createNewFile();
+//                    LogManager.i("create file = " + success);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
 //                }
             }
         });
