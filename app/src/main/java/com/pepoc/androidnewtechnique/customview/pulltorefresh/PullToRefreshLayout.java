@@ -1,10 +1,12 @@
 package com.pepoc.androidnewtechnique.customview.pulltorefresh;
 
 import android.content.Context;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.Scroller;
 
@@ -17,11 +19,12 @@ import com.pepoc.androidnewtechnique.log.LogManager;
 public class PullToRefreshLayout extends ViewGroup {
 
     private Scroller mScroller;
+    private ViewConfiguration configuration;
 
     private View headerView = null;
     private View contentView = null;
     private boolean orientation;
-
+    private boolean isMove = true;
 
 
     public PullToRefreshLayout(Context context) {
@@ -121,56 +124,66 @@ public class PullToRefreshLayout extends ViewGroup {
                 startY = ev.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
-//                LogManager.i("====================ACTION_MOVE=============== startY === " + startY);
 
                 float moveY = ev.getY();
-//                LogManager.i("==================== moveY === " + moveY);
+                orientation = moveY - startY > 0;
 
 
-
-                if (moveY - startY > 0) {
-                    LogManager.i("orientation ++++++++++++++++++++++++");
-                    orientation= true;
+                if (orientation) {
+                    // 下滑
+                    if (isSildeAllView()) {
+                        if (startY != -1) {
+                            int moveDis = (int) ((startY - moveY) * getDampedCoefficient());
+                            scrollBy(0, moveDis);
+                        }
+                        startY = moveY;
+                        LogManager.i("XXX, 139");
+                        return true;
+                    } else {
+                        startY = moveY;
+                        LogManager.i("XXX, 143");
+                        LogManager.i("---------return super.dispatchTouchEvent(ev);-------");
+                        return super.dispatchTouchEvent(ev);
+                    }
                 } else {
-                    LogManager.i("orientation ************************");
-                    orientation = false;
+                    // 上滑
+                    if (isSildeAllView() && getScrollY() < 0) {
+                        if (startY != -1) {
+                            int moveDis = (int) ((startY - moveY) * getDampedCoefficient());
+                            scrollBy(0, moveDis);
+                        }
+                        startY = moveY;
+                        LogManager.i("XXX, 152");
+                        return true;
+                    } else {
+                        startY = moveY;
+                        LogManager.i("XXX, 156");
+                        LogManager.i("---------return super.dispatchTouchEvent(ev);-------");
+                        return super.dispatchTouchEvent(ev);
+                    }
                 }
 
 
 //                getChildAt(0).offsetTopAndBottom((int) ((moveY - startY) * 0.3));
-                if (startY != -1) {
-                    if (isShowHeader() && orientation || getScrollY() < 0) {
-                        int moveDis = (int) ((startY - moveY) * (1.0f - (Math.abs(getScrollY() * 1.0f) / (headerView.getHeight() / 2 * 1.0f))) * 0.3);
-                        scrollBy(0, moveDis);
-                        startY = moveY;
-                        return true;
-                    } else {
-                        LogManager.i("Scroll ---------------------------------");
-                        startY = moveY;
-                        return super.dispatchTouchEvent(ev);
-                    }
-                }
-                startY = moveY;
 
-                break;
+
+//                startY = moveY;
+
+//                break;
             case MotionEvent.ACTION_UP:
-//                LogManager.i("====================ACTION_UP==========================");
-//                mScroller.startScroll(getScrollX(), getScrollY(), 0, -(getBottom() + getScrollY()), 300);
                 mScroller.startScroll(getScrollX(), getScrollY(), 0, -getScrollY(), 300);
                 postInvalidate();
-                break;
+                return super.dispatchTouchEvent(ev);
 
             case MotionEvent.ACTION_POINTER_UP:
                 startY = -1;
-//                LogManager.i("====================ACTION_POINTER_UP==========================");
                 break;
         }
-        if (isShowHeader() && orientation || getScrollY() < 0) {
+        if (isSildeAllView() && getScrollY() < 0) {
             return true;
-        } else {
-            LogManager.i("getScrollY #####################################");
-            return super.dispatchTouchEvent(ev);
         }
+        LogManager.i("---------return super.dispatchTouchEvent(ev);------- " + ev.getAction());
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override
@@ -182,8 +195,51 @@ public class PullToRefreshLayout extends ViewGroup {
         }
     }
 
-    private boolean isShowHeader() {
-        return contentView.getScrollY() <= 0;
-//        return !contentView.canScrollVertically(-1);
+    private boolean isSildeAllView() {
+        // getScrollY() 往下拉是 负值
+
+//        return contentView.getScrollY() <= 0;
+        return !canChildScrollUp(contentView);
+    }
+
+    /**
+     * 是否能下拉
+     *
+     * @return
+     */
+    private boolean canChildScrollUp(View view) {
+//        if (android.os.Build.VERSION.SDK_INT < 14) {
+//            if (view instanceof AbsListView) {
+//                final AbsListView absListView = (AbsListView) view;
+//                return absListView.getChildCount() > 0
+//                        && (absListView.getFirstVisiblePosition() > 0 || absListView.getChildAt(0)
+//                        .getTop() < absListView.getPaddingTop());
+//            }
+//        }
+        return ViewCompat.canScrollVertically(view, -1);
+    }
+
+
+    /**
+     * 是否能上拉
+     *
+     * @return
+     */
+    private boolean canChildScrollDown(View view) {
+//        if (android.os.Build.VERSION.SDK_INT < 14) {
+//            if (view instanceof AbsListView) {
+//                final AbsListView absListView = (AbsListView) view;
+//                return absListView.getChildCount() > 0
+//                        && (absListView.getLastVisiblePosition() < absListView.getChildCount() - 1
+//                        || absListView.getChildAt(absListView.getChildCount() - 1).getBottom() > absListView.getHeight() - absListView.getPaddingBottom());
+//            }
+//        }
+        return ViewCompat.canScrollVertically(view, 1);
+
+    }
+
+    private double getDampedCoefficient() {
+//        return 1.0d;
+        return (1.0d - (Math.abs(getScrollY() * 1.0d) / (headerView.getHeight() * 1.0d))) * 0.3d;
     }
 }
