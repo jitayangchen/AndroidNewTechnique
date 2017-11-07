@@ -8,6 +8,10 @@ public class LogManager {
 		LogImpl.getLogImpl().i(message);
 	}
 
+	public static void i(String tag, String message) {
+		LogImpl.getLogImpl().i(tag, message);
+	}
+
 	public static void d(String message) {
 		LogImpl.getLogImpl().d(message);
 	}

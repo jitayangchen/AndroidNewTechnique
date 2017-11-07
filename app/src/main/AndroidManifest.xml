@@ -7,10 +7,16 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:name=".TApplication"
@@ -92,6 +98,7 @@
             </intent-filter>
         </service>
         <service android:name=".screenlocker.ScreenLockService" />
+        <service android:name=".services.foreground.ForegroundService" />
 
         <receiver android:name=".broadcastreceiver.MyBroadcastReceiver">
             <intent-filter>
@@ -138,7 +145,22 @@
         <activity android:name=".leakcanary.LeakCanaryTestActivity" />
         <activity android:name=".facebook.FaceboolLoginActivity" />
         <activity android:name=".customview.layout.LayoutDemoActivity" />
-        <activity android:name=".customview.pulltorefresh.PullToRefreshActivity"></activity>
+        <activity android:name=".customview.pulltorefresh.PullToRefreshActivity" />
+        <activity android:name=".timer.TimerDemoActivity" />
+        <activity android:name=".keyboardinput.KeyBoardInputActivity" />
+        <activity android:name=".clipboard.ClipboardDemoActivity" />
+        <activity android:name=".services.foreground.ForegroundServiceDemoActivity" />
+        <activity android:name=".ocr.OcrDemoActivity" />
+        <activity android:name=".systemlanuage.SystemLanuageActivity" />
+        <activity android:name=".ocr.PreviewPictureActivity" />
+        <activity
+            android:name=".ocr.InterceptRectViewActivity"
+            android:theme="@style/AppTheme.NoActionBar.FullScreen" />
+        <activity android:name=".camera.CameraDemoActivity" />
+        <activity android:name=".camera.CameraPreviewActivity" />
+        <activity android:name=".customview.draw.DrawMothedDemoActivity" />
+        <activity android:name=".customview.drawable.DrawableDemoActivity" />
+        <activity android:name=".customview.animation.AnimationDemoActivity"></activity>
     </application>
 
 </manifest>

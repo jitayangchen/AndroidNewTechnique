@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/test_img"
+    tools:context="com.pepoc.androidnewtechnique.keyboardinput.KeyBoardInputActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_rv"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_above="@+id/fl_bottom">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_input_event"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:visibility="visible"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_get_visible_rect"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_above="@id/rl_rv"
+        android:text="获取可见区域"/>
+</RelativeLayout>

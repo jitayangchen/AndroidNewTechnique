@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_matrix"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.pepoc.androidnewtechnique.matrix.MatrixActivity">
 
-    <com.pepoc.androidnewtechnique.matrix.MatrixSimple
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</RelativeLayout>
+    <!--<com.pepoc.androidnewtechnique.matrix.MatrixSimple-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/privacy_scanning_shield_xxxhdpi"
+        android:visibility="visible"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/privacy_scanning_shield_xxhdpi"
+        android:visibility="visible"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/privacy_scanning_shield_xhdpi"
+        android:visibility="visible"/>
+
+    <!--<View-->
+        <!--android:layout_width="320dp"-->
+        <!--android:layout_height="160dp"-->
+        <!--android:background="@color/colorAccent"/>-->
+
+    <!--<View-->
+        <!--android:layout_width="640px"-->
+        <!--android:layout_height="160px"-->
+        <!--android:background="@color/colorAccent"/>-->
+</LinearLayout>

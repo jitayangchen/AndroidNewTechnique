@@ -50,7 +50,7 @@ public class MatrixSimple extends View {
 
         options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.RGB_565;
-//        bitmap = BitmapFactory.decodeStream(getContext().getResources().openRawResource(+R.drawable.privacy_scanning_shield), null, options);
+//        bitmap = BitmapFactory.decodeStream(getContext().getResources().openRawResource(+R.drawable.privacy_scanning_shield_mdpi), null, options);
         bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.shield, options);
 
         initVirusData();

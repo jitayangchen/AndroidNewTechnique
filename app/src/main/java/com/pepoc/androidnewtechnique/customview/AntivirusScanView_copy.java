@@ -113,7 +113,7 @@ public class AntivirusScanView_copy extends View {
         virusArr[2] = bmScanningVirus3;
         virusArr[3] = bmScanningVirus4;
 
-//        bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.privacy_scanning_shield, options);
+//        bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.privacy_scanning_shield_mdpi, options);
         bitmap = BitmapFactory.decodeStream(getContext().getResources().openRawResource(R.mipmap.privacy_scanning_shield), null, null);
 
         options.outWidth = bitmap.getWidth();

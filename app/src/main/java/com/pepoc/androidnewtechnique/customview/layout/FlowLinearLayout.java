@@ -1,6 +1,7 @@
 package com.pepoc.androidnewtechnique.customview.layout;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
  */
 
 public class FlowLinearLayout extends LinearLayout {
+
     public FlowLinearLayout(Context context) {
         super(context);
     }
@@ -22,7 +24,9 @@ public class FlowLinearLayout extends LinearLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public FlowLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
     }
 }

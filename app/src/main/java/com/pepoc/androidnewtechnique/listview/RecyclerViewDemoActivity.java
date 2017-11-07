@@ -9,12 +9,14 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pepoc.androidnewtechnique.R;
 import com.pepoc.androidnewtechnique.customview.ConstrictionView;
+import com.pepoc.androidnewtechnique.log.LogManager;
 
 public class RecyclerViewDemoActivity extends AppCompatActivity {
 
@@ -22,6 +24,8 @@ public class RecyclerViewDemoActivity extends AppCompatActivity {
     private AdapterDemo adapterDemo;
     private int count = 20;
     private View ivTargetMove;
+    private LinearLayoutManager linearLayoutManager;
+    private int[] location = new int[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +35,96 @@ public class RecyclerViewDemoActivity extends AppCompatActivity {
         ivTargetMove = findViewById(R.id.iv_target_move);
         recyclerViewDemo = (RecyclerView) findViewById(R.id.recycler_view_demo);
 
-        recyclerViewDemo.setLayoutManager(new LinearLayoutManager(this));
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerViewDemo.setLayoutManager(linearLayoutManager);
         adapterDemo = new AdapterDemo();
         recyclerViewDemo.setAdapter(adapterDemo);
         recyclerViewDemo.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerViewDemo.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition();
+                int lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition();
+//                LogManager.i("firstVisibleItemPosition === " + firstVisibleItemPosition);
+
+                if (3 >= firstVisibleItemPosition && 3 <= lastVisibleItemPosition) {
+//                    View viewByPosition = linearLayoutManager.findViewByPosition(3);
+                    RecyclerView.ViewHolder viewHolderForLayoutPosition = recyclerViewDemo.findViewHolderForLayoutPosition(3);
+
+                    recyclerViewDemo.getLocationInWindow(location);
+//                    recyclerViewDemo.getLocationOnScreen(location);
+//                    LogManager.i("y === " + location[1]);
+
+//                    LogManager.i("Location", "Top === " + viewHolderForLayoutPosition.itemView.getTop());
+                }
+            }
+        });
+
+//        recyclerViewDemo.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+//
+//            float startDownY;
+//            ViewConfiguration configuration = ViewConfiguration.get(RecyclerViewDemoActivity.this);
+//            boolean isIntercept = false;
+//
+//            @Override
+//            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+//                switch (e.getActionMasked()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        LogManager.i("onInterceptTouchEvent", "MotionEvent.ACTION_DOWN");
+//                        startDownY = e.getY();
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+////                        LogManager.i("onInterceptTouchEvent", "MotionEvent.ACTION_MOVE");
+//                        if (Math.abs(e.getY() - startDownY) <= configuration.getScaledTouchSlop()) {
+//                            isIntercept = true;
+//                        } else {
+//                            isIntercept = false;
+//                        }
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        LogManager.i("onInterceptTouchEvent", "MotionEvent.ACTION_UP");
+//                        isIntercept = false;
+//                        break;
+//                    case MotionEvent.ACTION_POINTER_DOWN:
+//                        LogManager.i("onInterceptTouchEvent", "MotionEvent.ACTION_POINTER_DOWN");
+//                        break;
+////                        return true;
+//                    case MotionEvent.ACTION_POINTER_UP:
+//                        LogManager.i("onInterceptTouchEvent", "MotionEvent.ACTION_POINTER_UP");
+////                        break;
+//                        return isIntercept;
+//                }
+//                return false;
+//            }
+//
+//            @Override
+//            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+//
+//            }
+//        });
+//
+//        recyclerViewDemo.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
+//            @Override
+//            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+//                return super.onInterceptTouchEvent(rv, e);
+//            }
+//        });
     }
 
-    class AdapterDemo extends RecyclerView.Adapter<ViewHolder> {
+    private class AdapterDemo extends RecyclerView.Adapter<ViewHolder> {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -62,7 +149,7 @@ public class RecyclerViewDemoActivity extends AppCompatActivity {
         ConstrictionView constrictionView;
         View ivTarget;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
 
             textView = (TextView) itemView.findViewById(R.id.text_view);
@@ -88,6 +175,30 @@ public class RecyclerViewDemoActivity extends AppCompatActivity {
 
                     ivTargetMove.setTranslationX(locationTarget[0] - location[0]);
                     ivTargetMove.setTranslationY(locationTarget[1] - location[1]);
+                }
+            });
+
+            itemView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getActionMasked()) {
+                        case MotionEvent.ACTION_DOWN:
+                            LogManager.i("onTouch", "MotionEvent.ACTION_DOWN");
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+//                        LogManager.i("onTouch", "MotionEvent.ACTION_MOVE");
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            LogManager.i("onTouch", "MotionEvent.ACTION_UP");
+                            break;
+                        case MotionEvent.ACTION_POINTER_DOWN:
+                            LogManager.i("onTouch", "MotionEvent.ACTION_POINTER_DOWN");
+                            break;
+                        case MotionEvent.ACTION_POINTER_UP:
+                            LogManager.i("onTouch", "MotionEvent.ACTION_POINTER_UP");
+                            break;
+                    }
+                    return false;
                 }
             });
         }

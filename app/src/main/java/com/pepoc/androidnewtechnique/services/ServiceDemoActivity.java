@@ -82,7 +82,7 @@ public class ServiceDemoActivity extends AppCompatActivity {
             ServicesDemo mService = binder.getService();
             mService.print();
 
-//            iMyAidlInterface = IMyAidlInterface.Stub.asInterface(service);
+            iMyAidlInterface = IMyAidlInterface.Stub.asInterface(service);
 
         }
 

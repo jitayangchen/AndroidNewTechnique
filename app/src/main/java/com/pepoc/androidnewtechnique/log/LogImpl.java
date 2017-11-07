@@ -79,6 +79,11 @@ public class LogImpl implements Log {
 
 	@Override
 	public void i(String message) {
+		i(tag, message);
+	}
+
+	@Override
+	public void i(String tag, String message) {
 		if (!LogManager.isRelease) {
 			String baseMsg = getLogMessage();
 			if (null == baseMsg) {

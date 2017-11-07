@@ -21,7 +21,7 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url "http://10.240.210.129:8081/repository/jiayuan" }
+//        maven { url "http://10.240.210.129:8081/repository/jiayuan" }
         jcenter()
         maven { url "https://jitpack.io" }
         mavenCentral()
@@ -29,8 +29,8 @@ allprojects {
 }
 
 ext {
-    compileSdkVersion = 25
-    buildToolsVersion = "25.0.2"
+    compileSdkVersion = 26
+    buildToolsVersion = "26.0.2"
 }
 
 task clean(type: Delete) {

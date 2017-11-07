@@ -13,6 +13,8 @@ public interface Log {
 	void i(String message, Throwable t);
 	
 	void i(String message);
+
+	void i(String tag, String message);
 	
 	void w(String message, Throwable t);
 	

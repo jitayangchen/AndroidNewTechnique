@@ -27,7 +27,7 @@ public class AndfixActivity extends AppCompatActivity {
         });
     }
 
-    private void testAndfix() {
+    public void testAndfix() {
 //        Toast.makeText(this, "我是个错误 啦啦啦", Toast.LENGTH_SHORT).show();
         Toast.makeText(this, "把你解决了  哦哦哦  耶！！！", Toast.LENGTH_SHORT).show();
     }

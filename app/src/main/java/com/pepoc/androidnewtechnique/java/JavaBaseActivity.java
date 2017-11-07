@@ -1,6 +1,7 @@
 package com.pepoc.androidnewtechnique.java;
 
 import android.os.Bundle;
+import android.support.annotation.Size;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -29,6 +30,12 @@ public class JavaBaseActivity extends AppCompatActivity {
                 LogManager.i("CONFIG = " + TApplication.CONFIG);
             }
         });
+
+        test(new String[]{"ddd"});
+    }
+
+    private void test(@Size(2) String[] str) {
+        LogManager.i(str[0]);
     }
 
 

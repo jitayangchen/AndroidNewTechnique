@@ -1,5 +1,6 @@
 package com.pepoc.androidnewtechnique.customview;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.pepoc.androidnewtechnique.R;
 import com.pepoc.androidnewtechnique.customview.copy.AntivirusScanView;
+import com.pepoc.androidnewtechnique.log.LogManager;
 
 public class CanvasDemoActivity extends AppCompatActivity {
 
@@ -88,6 +90,8 @@ public class CanvasDemoActivity extends AppCompatActivity {
 
         constrictionView = (ConstrictionView) findViewById(R.id.constriction_view);
 
+        LogManager.i("Context", "Activity this === " + this.toString());
+        LogManager.i("Context", "View === " + ((Activity)(constrictionView.getContext())).toString());
 
         findViewById(R.id.btn_start).setOnClickListener(new View.OnClickListener() {
             @Override

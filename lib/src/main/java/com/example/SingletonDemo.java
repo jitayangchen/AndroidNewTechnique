@@ -16,13 +16,18 @@ public class SingletonDemo {
         }
     }
 
-    public static synchronized SingletonDemo getInstance() {
+    static synchronized SingletonDemo getInstance() {
         if (instance == null) {
-            instance = new SingletonDemo();
+//            instance = new SingletonDemo();
+            instance = InstanceCreate.instance;
             Log.i("-----------------getInstance()----------------");
         }
 
         return instance;
+    }
+
+    static class InstanceCreate {
+        public final static SingletonDemo instance = new SingletonDemo();
     }
 
     public void function(String threadName) {

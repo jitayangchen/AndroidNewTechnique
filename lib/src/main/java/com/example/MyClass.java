@@ -39,9 +39,21 @@ public class MyClass {
 //        String format = formatter.format(getDayStartTime());
 //        Log.i(format);
 
-        Log.i("== " + ("YYY" == "YYY"));
-        Log.i("== " + "YYY".hashCode());
-        Log.i("== " + ("YYY" == "YYY"));
+//        Log.i("== " + ("YYY" == "YYY"));
+//        Log.i("== " + "YYY".hashCode());
+//        Log.i("== " + ("YYY" == "YYY"));
+
+
+        try {
+            String str = null;
+            System.out.print(MyClass.class.getName());
+            if (MyClass.class.getName().equals("com.example.MyClass3328")) {
+                str = null;
+            }
+            System.out.print(str.hashCode());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     static class MyThread extends Thread {

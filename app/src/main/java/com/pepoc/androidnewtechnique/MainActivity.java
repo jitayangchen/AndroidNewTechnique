@@ -20,9 +20,13 @@ import com.pepoc.androidnewtechnique.androidbase.RotateActivity;
 import com.pepoc.androidnewtechnique.asynctask.AsyncTaskDemoActivity;
 import com.pepoc.androidnewtechnique.beziercurve.BezierCurveActivity;
 import com.pepoc.androidnewtechnique.bitmap.BitmapDemoActivity;
+import com.pepoc.androidnewtechnique.camera.CameraDemoActivity;
+import com.pepoc.androidnewtechnique.clipboard.ClipboardDemoActivity;
 import com.pepoc.androidnewtechnique.collection.BlockingQueueActivity;
 import com.pepoc.androidnewtechnique.customview.CanvasDemoActivity;
 import com.pepoc.androidnewtechnique.customview.SlideViewActivity;
+import com.pepoc.androidnewtechnique.customview.animation.AnimationDemoActivity;
+import com.pepoc.androidnewtechnique.customview.draw.DrawMothedDemoActivity;
 import com.pepoc.androidnewtechnique.customview.pulltorefresh.PullToRefreshActivity;
 import com.pepoc.androidnewtechnique.eventbus.EventBusActivity;
 import com.pepoc.androidnewtechnique.file.FileActivity;
@@ -30,10 +34,12 @@ import com.pepoc.androidnewtechnique.fragment.FragmentDemoActivity;
 import com.pepoc.androidnewtechnique.handler.HandlerDemoActivity;
 import com.pepoc.androidnewtechnique.java.JavaBaseActivity;
 import com.pepoc.androidnewtechnique.jni.JniActivity;
+import com.pepoc.androidnewtechnique.keyboardinput.KeyBoardInputActivity;
 import com.pepoc.androidnewtechnique.leakcanary.LeakCanaryTestActivity;
 import com.pepoc.androidnewtechnique.listview.RecyclerViewDemoActivity;
 import com.pepoc.androidnewtechnique.log.LogManager;
 import com.pepoc.androidnewtechnique.matrix.MatrixActivity;
+import com.pepoc.androidnewtechnique.ocr.OcrDemoActivity;
 import com.pepoc.androidnewtechnique.okhttp.OkHttpActivity;
 import com.pepoc.androidnewtechnique.process.ProcessDemoActivity;
 import com.pepoc.androidnewtechnique.realm.RealmActivity;
@@ -44,11 +50,14 @@ import com.pepoc.androidnewtechnique.rxjava.RxJavaActivity;
 import com.pepoc.androidnewtechnique.screenlocker.ScreenLockerActivity;
 import com.pepoc.androidnewtechnique.scroller.ScrollerActivity;
 import com.pepoc.androidnewtechnique.services.ServiceDemoActivity;
+import com.pepoc.androidnewtechnique.services.foreground.ForegroundServiceDemoActivity;
 import com.pepoc.androidnewtechnique.services.notification.NotificationListenerActivity;
 import com.pepoc.androidnewtechnique.sqlite.SqliteDemoActivity;
 import com.pepoc.androidnewtechnique.svg.SVGActivity;
+import com.pepoc.androidnewtechnique.systemlanuage.SystemLanuageActivity;
 import com.pepoc.androidnewtechnique.textview.TextViewDemoActivity;
 import com.pepoc.androidnewtechnique.threadpool.ThreadPollDemoActivity;
+import com.pepoc.androidnewtechnique.timer.TimerDemoActivity;
 import com.pepoc.androidnewtechnique.touchevent.TouchEventDemoActivity;
 import com.pepoc.androidnewtechnique.util.HomeListenerHelper;
 import com.pepoc.androidnewtechnique.viewstub.ViewStubDemoActivity;
@@ -106,6 +115,13 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Class<? extends Activity>> getData() {
         List<Class<? extends Activity>> classList = new ArrayList<>();
+        classList.add(AnimationDemoActivity.class);
+        classList.add(DrawMothedDemoActivity.class);
+        classList.add(CameraDemoActivity.class);
+        classList.add(SystemLanuageActivity.class);
+        classList.add(OcrDemoActivity.class);
+        classList.add(ForegroundServiceDemoActivity.class);
+        classList.add(ClipboardDemoActivity.class);
         classList.add(PullToRefreshActivity.class);
         classList.add(LeakCanaryTestActivity.class);
         classList.add(WifiTestActivity.class);
@@ -145,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
         classList.add(RecyclerViewDemoActivity.class);
         classList.add(TextViewDemoActivity.class);
         classList.add(SVGActivity.class);
+        classList.add(TimerDemoActivity.class);
+        classList.add(KeyBoardInputActivity.class);
         return classList;
     }
 

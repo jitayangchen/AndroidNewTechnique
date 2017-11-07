@@ -102,8 +102,8 @@ public class AntivirusScanView extends View {
 
     private void init() {
 
-        shieldWidth = getContext().getResources().getDimension(R.dimen.antivirus_scan_view_shield_width);
-        shieldHeight = getContext().getResources().getDimension(R.dimen.antivirus_scan_view_shield_height);
+//        shieldWidth = getContext().getResources().getDimension(R.dimen.antivirus_scan_view_shield_width);
+//        shieldHeight = getContext().getResources().getDimension(R.dimen.antivirus_scan_view_shield_height);
 
         initVirusData();
 
@@ -135,12 +135,6 @@ public class AntivirusScanView extends View {
                 lineRectF.left = shieldRectF.left - (shieldRectF.left * value);
                 lineRectF.right = shieldRectF.right + (getWidth() - shieldRectF.right) * value;
                 invalidate();
-
-                try {
-                    throw new Exception("Call Stack Trace");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             }
         });
 
@@ -309,6 +303,8 @@ public class AntivirusScanView extends View {
         options.inPreferredConfig = Bitmap.Config.RGB_565;
 
         bmScanningShield = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.privacy_scanning_shield, options);
+        shieldWidth = bmScanningShield.getWidth();
+        shieldHeight = bmScanningShield.getHeight();
 //        bmScanningShield = BitmapFactory.decodeStream(getContext().getResources().openRawResource(+R.drawable.antivirus_scanning_shield), null, options);
         bmScanningShieldBg = BitmapFactory.decodeResource(getContext().getResources(), R.mipmap.antivirus_scanning_virus_1, options);
 //        bmScanningShieldBg = BitmapFactory.decodeStream(getContext().getResources().openRawResource(+R.drawable.antivirus_scanning_shield_bg), null, options);

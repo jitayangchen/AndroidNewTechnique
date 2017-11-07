@@ -2,7 +2,9 @@ package com.pepoc.androidnewtechnique.customview.pulltorefresh;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.pepoc.androidnewtechnique.R;
 
@@ -17,5 +19,9 @@ public class PullToRefreshActivity extends AppCompatActivity {
         ImageView headerView = new ImageView(this);
         headerView.setBackgroundResource(R.drawable.test_img);
         pullToRefreshLayout.setHeaderView(headerView);
+    }
+
+    public void testClick(View view) {
+        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
     }
 }

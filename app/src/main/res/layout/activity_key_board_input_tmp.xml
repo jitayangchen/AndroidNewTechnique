@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/live_root_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/test_img"
+        android:visibility="visible"/>
+
+    <!--<ImageView-->
+        <!--android:id="@+id/live_video"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:src="@drawable/test_img"-->
+        <!--android:layout_centerInParent="true"/>-->
+
+    <RelativeLayout
+        android:id="@+id/live_play_root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <!--互动层-->
+        <RelativeLayout
+            android:id="@+id/live_play"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/top_layout_container"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/anchor_info_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center">
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/member_info_container"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+            <!--直播底部控件-->
+            <FrameLayout
+                android:id="@+id/bottom_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/et_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </FrameLayout>
+
+            <!--直播消息列表-->
+            <FrameLayout
+                android:id="@+id/chat_message_container"
+                android:layout_width="250dp"
+                android:layout_height="200dp"
+                android:layout_above="@id/bottom_container">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_input_event"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </FrameLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
