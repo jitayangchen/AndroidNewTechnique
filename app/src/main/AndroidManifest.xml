@@ -147,7 +147,9 @@
         <activity android:name=".customview.layout.LayoutDemoActivity" />
         <activity android:name=".customview.pulltorefresh.PullToRefreshActivity" />
         <activity android:name=".timer.TimerDemoActivity" />
-        <activity android:name=".keyboardinput.KeyBoardInputActivity" />
+        <activity
+            android:name=".keyboardinput.KeyBoardInputActivity"
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".clipboard.ClipboardDemoActivity" />
         <activity android:name=".services.foreground.ForegroundServiceDemoActivity" />
         <activity android:name=".ocr.OcrDemoActivity" />
@@ -160,7 +162,15 @@
         <activity android:name=".camera.CameraPreviewActivity" />
         <activity android:name=".customview.draw.DrawMothedDemoActivity" />
         <activity android:name=".customview.drawable.DrawableDemoActivity" />
-        <activity android:name=".customview.animation.AnimationDemoActivity"></activity>
+        <activity android:name=".customview.animation.AnimationDemoActivity" />
+        <activity
+            android:name=".fragment.SingleTaskDemoActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".keyboardinput.EditTextDemoActivity"
+            android:theme="@style/AppTheme.NoActionBar.Transparent"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".memoryleak.MemoryLeakActivity"></activity>
     </application>
 
 </manifest>

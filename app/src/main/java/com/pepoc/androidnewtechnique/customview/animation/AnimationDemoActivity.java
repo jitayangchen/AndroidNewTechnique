@@ -1,5 +1,10 @@
 package com.pepoc.androidnewtechnique.customview.animation;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -32,7 +37,7 @@ public class AnimationDemoActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_animation_test:
-                btnAnimate.setDuration(3000).setInterpolator(new CustomInterpolator()).translationYBy(500);
+//                btnAnimate.setDuration(3000).setInterpolator(new CustomInterpolator()).translationYBy(500);
 //                btnAnimate.xBy(100);
 //                btnAnimate.translationXBy(100);
 //                btnAnimate.zBy(100);
@@ -41,8 +46,70 @@ public class AnimationDemoActivity extends AppCompatActivity implements View.OnC
 //                btnAnimate.scaleX(2);
 //                btnAnimate.scaleY(2);
 //                btnAnimate.alpha(0.5f);
+
+//                animatorSetTest();
+
+                valueAnimatorTest();
                 break;
         }
+    }
+
+    private void animatorSetTest() {
+        ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(btnAnimationTest, "scaleX", 3f);
+        ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(btnAnimationTest, "scaleY", 3f);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.setDuration(500);
+//        animatorSet.play(objectAnimator1).with(objectAnimator2);
+//        animatorSet.playTogether(objectAnimator1, objectAnimator2);
+//        animatorSet.play(objectAnimator1).after(objectAnimator2);
+        animatorSet.play(objectAnimator1).before(objectAnimator2);
+        animatorSet.start();
+    }
+
+    private void valueAnimatorTest() {
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 100f);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float animatedFraction = (float) animation.getAnimatedValue();
+                btnAnimationTest.setTranslationX(animatedFraction);
+            }
+        });
+
+        valueAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                super.onAnimationCancel(animation);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                super.onAnimationRepeat(animation);
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+            }
+
+            @Override
+            public void onAnimationPause(Animator animation) {
+                super.onAnimationPause(animation);
+            }
+
+            @Override
+            public void onAnimationResume(Animator animation) {
+                super.onAnimationResume(animation);
+            }
+        });
+
+        valueAnimator.setDuration(300);
+        valueAnimator.start();
     }
 
     class CustomInterpolator implements Interpolator {

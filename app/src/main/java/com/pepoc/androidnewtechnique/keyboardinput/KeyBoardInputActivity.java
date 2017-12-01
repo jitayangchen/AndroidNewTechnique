@@ -1,5 +1,6 @@
 package com.pepoc.androidnewtechnique.keyboardinput;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +50,12 @@ public class KeyBoardInputActivity extends AppCompatActivity {
         rvInputEvent.setLayoutManager(new LinearLayoutManager(this));
         rvInputEvent.setAdapter(new MyAdapter());
 
+        findViewById(R.id.btn_start).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(KeyBoardInputActivity.this, EditTextDemoActivity.class));
+            }
+        });
     }
 
     private class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

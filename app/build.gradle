@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'realm-android'
+//apply plugin: 'realm-android'
 //apply plugin: 'me.tatarka.retrolambda'
 //apply plugin: 'plugin.test'
 
@@ -10,14 +10,14 @@ android {
     defaultConfig {
         applicationId "com.pepoc.androidnewtechnique"
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -31,9 +31,9 @@ android {
         abortOnError false
     }
 
-    packagingOptions {
-        exclude 'META-INF/services/javax.annotation.processing.Processor'
-    }
+//    packagingOptions {
+//        exclude 'META-INF/services/javax.annotation.processing.Processor'
+//    }
 
 //    compileOptions {
 //        sourceCompatibility JavaVersion.VERSION_1_8
@@ -67,7 +67,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.jakewharton.rxbinding:rxbinding:0.3.0'
     compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'com.jakewharton:butterknife:7.0.1'
+//    compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.github.orhanobut:logger:1.12'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'org.simple:androideventbus:1.0.5.1'

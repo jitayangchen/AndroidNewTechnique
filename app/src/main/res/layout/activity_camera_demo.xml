@@ -14,9 +14,9 @@
         android:layout_height="match_parent"
         />
 
-    <com.pepoc.androidnewtechnique.camera.AuthenticationAreaView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <!--<com.pepoc.androidnewtechnique.camera.AuthenticationAreaView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
 
     <Button
         android:id="@+id/button_capture"
@@ -26,4 +26,11 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:text="Capture" />
+
+    <Button
+        android:id="@+id/btn_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/button_capture"
+        android:text="Change"/>
 </RelativeLayout>

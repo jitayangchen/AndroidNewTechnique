@@ -7,9 +7,7 @@ import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.pepoc.androidnewtechnique.R;
 import com.pepoc.androidnewtechnique.log.LogManager;
@@ -33,14 +31,14 @@ public class InterceptRectViewActivity extends AppCompatActivity {
         LogManager.i("screenWidth = " + screenWidth);
         LogManager.i("screenHeight = " + screenHeight);
 
-        WindowManager manager = this.getWindowManager();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        manager.getDefaultDisplay().getMetrics(outMetrics);
-        int width = outMetrics.widthPixels;
-        int height = outMetrics.heightPixels;
-
-        LogManager.i("screenWidth = " + width);
-        LogManager.i("screenHeight = " + height);
+//        WindowManager manager = this.getWindowManager();
+//        DisplayMetrics outMetrics = new DisplayMetrics();
+//        manager.getDefaultDisplay().getMetrics(outMetrics);
+//        int width = outMetrics.widthPixels;
+//        int height = outMetrics.heightPixels;
+//
+//        LogManager.i("screenWidth = " + width);
+//        LogManager.i("screenHeight = " + height);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mMediaProjectionManager = (MediaProjectionManager) getApplication().getSystemService(Context.MEDIA_PROJECTION_SERVICE);

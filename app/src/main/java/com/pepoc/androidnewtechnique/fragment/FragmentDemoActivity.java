@@ -1,5 +1,6 @@
 package com.pepoc.androidnewtechnique.fragment;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -20,7 +21,7 @@ public class FragmentDemoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fragment_demo);
         LogManager.i("----------------onCreate-----------------");
         init();
-        finish();
+//        finish();
     }
 
     private void init() {
@@ -36,6 +37,8 @@ public class FragmentDemoActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction1.detach(TestFragment.newInstance());
                 fragmentTransaction1.commit();
+
+                startActivity(new Intent(FragmentDemoActivity.this, SingleTaskDemoActivity.class));
             }
         });
 

@@ -31,6 +31,7 @@ import com.pepoc.androidnewtechnique.customview.pulltorefresh.PullToRefreshActiv
 import com.pepoc.androidnewtechnique.eventbus.EventBusActivity;
 import com.pepoc.androidnewtechnique.file.FileActivity;
 import com.pepoc.androidnewtechnique.fragment.FragmentDemoActivity;
+import com.pepoc.androidnewtechnique.fragment.SingleTaskDemoActivity;
 import com.pepoc.androidnewtechnique.handler.HandlerDemoActivity;
 import com.pepoc.androidnewtechnique.java.JavaBaseActivity;
 import com.pepoc.androidnewtechnique.jni.JniActivity;
@@ -39,6 +40,7 @@ import com.pepoc.androidnewtechnique.leakcanary.LeakCanaryTestActivity;
 import com.pepoc.androidnewtechnique.listview.RecyclerViewDemoActivity;
 import com.pepoc.androidnewtechnique.log.LogManager;
 import com.pepoc.androidnewtechnique.matrix.MatrixActivity;
+import com.pepoc.androidnewtechnique.memoryleak.MemoryLeakActivity;
 import com.pepoc.androidnewtechnique.ocr.OcrDemoActivity;
 import com.pepoc.androidnewtechnique.okhttp.OkHttpActivity;
 import com.pepoc.androidnewtechnique.process.ProcessDemoActivity;
@@ -67,23 +69,18 @@ import com.pepoc.androidnewtechnique.wifi.WifiTestActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.Observable;
 import rx.functions.Action1;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.ll_main_content)
     LinearLayout llMainContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
 
         init();
 
@@ -92,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         setSupportActionBar(toolbar);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        llMainContent = (LinearLayout) findViewById(R.id.ll_main_content);
 
         Observable.from(getData()).subscribe(new Action1<Class<? extends Activity>>() {
             @Override
@@ -115,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Class<? extends Activity>> getData() {
         List<Class<? extends Activity>> classList = new ArrayList<>();
+        classList.add(MemoryLeakActivity.class);
+        classList.add(SingleTaskDemoActivity.class);
         classList.add(AnimationDemoActivity.class);
         classList.add(DrawMothedDemoActivity.class);
         classList.add(CameraDemoActivity.class);

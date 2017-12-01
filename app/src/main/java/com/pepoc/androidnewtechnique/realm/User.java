@@ -1,14 +1,11 @@
 package com.pepoc.androidnewtechnique.realm;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
 /**
  * Created by yangchen on 16-1-8.
  */
-public class User extends RealmObject {
+public class User {
 
-    @PrimaryKey
+//    @PrimaryKey
     private long id;
     private String name;
     private int age;

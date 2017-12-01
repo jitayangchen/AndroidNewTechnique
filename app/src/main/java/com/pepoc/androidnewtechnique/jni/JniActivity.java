@@ -9,28 +9,27 @@ import android.widget.Toast;
 import com.jakewharton.rxbinding.view.RxView;
 import com.pepoc.androidnewtechnique.R;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.functions.Action1;
 
 public class JniActivity extends AppCompatActivity {
 
-    @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.btn_jni_test)
     Button btnJniTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jni);
-        ButterKnife.bind(this);
 
         init();
     }
 
     private void init() {
         setSupportActionBar(toolbar);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        btnJniTest = (Button) findViewById(R.id.btn_jni_test);
+
         RxView.clicks(btnJniTest).subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {

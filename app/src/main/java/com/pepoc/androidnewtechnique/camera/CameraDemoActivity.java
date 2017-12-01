@@ -31,7 +31,7 @@ public class CameraDemoActivity extends AppCompatActivity implements View.OnClic
     private final static String TAG = "CameraDemoActivity";
     private Camera mCamera;
     private CameraPreview mPreview;
-    public final static int CAMERA_ID = 1;
+    public int CAMERA_ID = 1;
     private boolean isPreview = true;
 
     @Override
@@ -56,6 +56,7 @@ public class CameraDemoActivity extends AppCompatActivity implements View.OnClic
 
 
         findViewById(R.id.button_capture).setOnClickListener(this);
+        findViewById(R.id.btn_change).setOnClickListener(this);
     }
 
     private void setCameraParams() {
@@ -199,6 +200,9 @@ public class CameraDemoActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btn_change:
+                changeCamera();
+                break;
             case R.id.button_capture:
 
                 if (mPreview == null || mPreview.getmCamera() == null) {
@@ -258,5 +262,9 @@ public class CameraDemoActivity extends AppCompatActivity implements View.OnClic
                 });
                 break;
         }
+    }
+
+    private void changeCamera() {
+        mPreview.changeCamera();
     }
 }

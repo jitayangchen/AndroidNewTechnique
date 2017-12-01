@@ -17,8 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pepoc.androidnewtechnique.camera.CameraDemoActivity.CAMERA_ID;
-
 /**
  * Created by yangchen on 2017/10/19.
  */
@@ -28,8 +26,10 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private SurfaceHolder mHolder;
     private Camera mCamera;
     private final static String TAG = "CameraPreview";
+    public int CAMERA_ID = 0;
     private int bitmapRotation;
     private int[] pictureSizeArr = new int[2];
+    private int numberOfCameras;
 
     public CameraPreview(Context context) {
         super(context);
@@ -43,6 +43,8 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         mHolder.addCallback(this);
         // deprecated setting, but required on Android versions prior to 3.0
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+
+        CAMERA_ID = getCameraId();
     }
 
     public Camera getmCamera() {
@@ -215,6 +217,12 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
         }
 
+        if (focusModes.contains(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
+            LogManager.i("Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE");
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+            mCamera.cancelAutoFocus();
+        }
+
 //        try {
 //            mCamera.setParameters(parameters);
 //        } catch (Exception e) {
@@ -255,6 +263,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
                         @Override
                         public void onAutoFocus(boolean success, Camera camera) {
                             LogManager.i("onAutoFocus === " + success);
+                            mCamera.cancelAutoFocus();
                         }
                     });
                 }
@@ -366,5 +375,63 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         }
 
         return result;
+    }
+
+    public void changeCamera() {
+        if (numberOfCameras < 2) {
+            return ;
+        }
+        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+        Camera.getCameraInfo(CAMERA_ID, cameraInfo);
+
+        if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
+            if (CAMERA_ID == 0) {
+                CAMERA_ID = 1;
+            }
+        } else if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            if (CAMERA_ID == 1) {
+                CAMERA_ID = 0;
+            }
+        }
+
+        stopPreview();
+        startPreview(getCameraInstance(), getHolder());
+    }
+
+    public int getCameraId() {
+
+//        int cameraId = -1;
+        numberOfCameras = Camera.getNumberOfCameras();
+//        if (numberOfCameras >= 2) {
+//
+//            Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+//            Camera.getCameraInfo(1, cameraInfo);
+//
+//            if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+//                cameraId = 1;
+//            } else {
+//                for (int i = 0; i < numberOfCameras; i++) {
+//                    if (i == 1)
+//                        continue;
+//                    Camera.getCameraInfo(i, cameraInfo);
+//                    if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+//                        cameraId = i;
+//                    }
+//                }
+//            }
+//
+//        } else if (numberOfCameras >= 1) {
+//            return 0;
+//        } else {
+//            return -1;
+//        }
+
+        if (numberOfCameras >= 2) {
+            return 1;
+        } else if (numberOfCameras >= 1) {
+            return 0;
+        }
+
+        return 0;
     }
 }
