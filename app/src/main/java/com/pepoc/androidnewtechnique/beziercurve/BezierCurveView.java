@@ -57,8 +57,8 @@ public class BezierCurveView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        startPoint = new RectF(0, getHeight() / 2, rectSize, getHeight() / 2 + rectSize);
-        endPoint = new RectF(getWidth() - rectSize, getHeight() / 2, getWidth(), getHeight() / 2 + rectSize);
+        startPoint = new RectF(0, getMeasuredHeight() / 2, rectSize, getMeasuredHeight() / 2 + rectSize);
+        endPoint = new RectF(getMeasuredWidth() - rectSize, getMeasuredHeight() / 2, getMeasuredWidth(), getMeasuredHeight() / 2 + rectSize);
     }
 
     private void init() {
