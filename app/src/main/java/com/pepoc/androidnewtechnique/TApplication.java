@@ -56,6 +56,13 @@ public class TApplication extends Application implements Application.ActivityLif
         LeakCanary.install(this);
 
 //        toggleNotificationListenerService();
+
+//        Looper.getMainLooper().setMessageLogging(new LogPrinter(Log.INFO, "MainThread") {
+//            @Override
+//            public void println(String x) {
+//                super.println(x);
+//            }
+//        });
     }
 
     public static Context getContext() {

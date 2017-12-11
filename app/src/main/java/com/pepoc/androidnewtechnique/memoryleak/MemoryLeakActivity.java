@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.pepoc.androidnewtechnique.R;
 
@@ -16,8 +17,9 @@ public class MemoryLeakActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memory_leak);
 
-//        MemoryLeakPool.addContext(this);
+        MemoryLeakPool.addContext(this);
 
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test_img);
+        Log.i("Test", bitmap.getWidth() + " - " + bitmap.getHeight());
     }
 }
