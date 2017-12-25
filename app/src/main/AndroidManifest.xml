@@ -160,7 +160,21 @@
         <activity android:name=".camera.CameraPreviewActivity" />
         <activity android:name=".customview.draw.DrawMothedDemoActivity" />
         <activity android:name=".customview.drawable.DrawableDemoActivity" />
+<<<<<<< Updated upstream
         <activity android:name=".customview.animation.AnimationDemoActivity"></activity>
+=======
+        <activity android:name=".customview.animation.AnimationDemoActivity" />
+        <activity
+            android:name=".fragment.SingleTaskDemoActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".keyboardinput.EditTextDemoActivity"
+            android:theme="@style/AppTheme.NoActionBar.Transparent"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".memoryleak.MemoryLeakActivity" />
+        <activity android:name=".pool.ObjectsPoolDemoActivity" />
+        <activity android:name=".constraintlayout.ConstraintLayoutDemoActivity"></activity>
+>>>>>>> Stashed changes
     </application>
 
 </manifest>

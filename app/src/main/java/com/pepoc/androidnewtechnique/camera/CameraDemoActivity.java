@@ -216,10 +216,10 @@ public class CameraDemoActivity extends AppCompatActivity implements View.OnClic
                             bm = BitmapFactory.decodeByteArray(data, 0, data.length);
                             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                                 Log.i(TAG, "Environment.getExternalStorageDirectory()="+Environment.getExternalStorageDirectory());
-                                String filePath = Environment.getExternalStorageDirectory() + "/AndroidNewTechnique/camera_"+System.currentTimeMillis()+".jpg";//照片保存路径
+                                String filePath = getExternalCacheDir() + "/AndroidNewTechnique/hahaha/lalala/xixixi/hehehe/camera_"+System.currentTimeMillis()+".jpg";//照片保存路径
                                 File file = new File(filePath);
                                 if (!file.getParentFile().exists()) {
-                                    file.getParentFile().mkdirs();
+                                    boolean result = file.getParentFile().mkdirs();
                                 }
                                 if (!file.exists()){
                                     boolean newFile = file.createNewFile();

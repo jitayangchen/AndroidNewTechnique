@@ -17,7 +17,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
-import android.support.v4.os.AsyncTaskCompat;
 import android.util.Log;
 
 import com.pepoc.androidnewtechnique.log.LogManager;
@@ -75,7 +74,7 @@ public class ScreenCapture {
             startScreenShot();
         } else {
             SaveTask mSaveTask = new SaveTask();
-            AsyncTaskCompat.executeParallel(mSaveTask, image);
+            mSaveTask.execute(image);
         }
 
         LogManager.i("----------startCapture---------");

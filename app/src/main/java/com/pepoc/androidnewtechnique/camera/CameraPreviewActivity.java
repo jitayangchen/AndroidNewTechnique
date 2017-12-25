@@ -12,7 +12,11 @@ import android.widget.ImageView;
 import com.pepoc.androidnewtechnique.R;
 import com.pepoc.androidnewtechnique.log.LogManager;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.ref.SoftReference;
 
 public class CameraPreviewActivity extends AppCompatActivity {
 
@@ -20,6 +24,11 @@ public class CameraPreviewActivity extends AppCompatActivity {
     public final static String PICTURE_ROTATION = "picture_rotation";
     public final static String PICTURE_SIZE = "picture_size";
     private ImageView ivPreview;
+    private String picturePath;
+    private ProcessingBitmap processingBitmap;
+    private int[] pictureSize;
+    private BitmapFactory.Options options;
+    private int pictureRotation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +37,12 @@ public class CameraPreviewActivity extends AppCompatActivity {
 
         ivPreview = (ImageView) findViewById(R.id.iv_preview);
 
+        processingBitmap = new ProcessingBitmap(this);
+
         Intent intent = getIntent();
-        String picturePath = intent.getStringExtra(PICTURE_PATH);
-        int pictureRotation = intent.getIntExtra(PICTURE_ROTATION, 0);
-        int[] pictureSize = intent.getIntArrayExtra(PICTURE_SIZE);
+        picturePath = intent.getStringExtra(PICTURE_PATH);
+        pictureRotation = intent.getIntExtra(PICTURE_ROTATION, 0);
+        pictureSize = intent.getIntArrayExtra(PICTURE_SIZE);
 
 
         ivPreview = (ImageView) findViewById(R.id.iv_preview);
@@ -44,21 +55,13 @@ public class CameraPreviewActivity extends AppCompatActivity {
 //        int degree = readPictureDegree(picturePath);
 //        LogManager.i("degree ======= " + degree);
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
+        options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(picturePath, options);
         LogManager.i("options.outWidth === " + options.outWidth);
         LogManager.i("options.outHeight === " + options.outHeight);
 
-        Bitmap newbitmap;
-        if (pictureSize[0] == options.outWidth && pictureSize[1] == options.outHeight
-                || pictureSize[0] > pictureSize[1] && options.outWidth > options.outHeight) {
-            newbitmap = getBitmap(picturePath, pictureRotation, true);
-        } else {
-            newbitmap = getBitmap(picturePath, pictureRotation, false);
-        }
-
-        ivPreview.setImageBitmap(newbitmap);
+        processingBitmap.start();
     }
 
     private Bitmap getBitmap(String picturePath, int pictureRotation, boolean isRotate) {
@@ -116,5 +119,59 @@ public class CameraPreviewActivity extends AppCompatActivity {
         Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
                 bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         return resizedBitmap;
+    }
+
+    private void saveBitmap(Bitmap bitmap) {
+        File file = new File(picturePath);
+        OutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private static class ProcessingBitmap extends Thread {
+
+        private final SoftReference<CameraPreviewActivity> activitySoftReference;
+
+        public ProcessingBitmap(CameraPreviewActivity cameraPreviewActivity) {
+            activitySoftReference = new SoftReference<>(cameraPreviewActivity);
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            final Bitmap newbitmap;
+            final CameraPreviewActivity cameraPreviewActivity = activitySoftReference.get();
+            if (cameraPreviewActivity == null) {
+                return ;
+            }
+            if (cameraPreviewActivity.pictureSize[0] == cameraPreviewActivity.options.outWidth
+                    && cameraPreviewActivity.pictureSize[1] == cameraPreviewActivity.options.outHeight
+                    || cameraPreviewActivity.pictureSize[0] > cameraPreviewActivity.pictureSize[1]
+                    && cameraPreviewActivity.options.outWidth > cameraPreviewActivity.options.outHeight) {
+                newbitmap = cameraPreviewActivity.getBitmap(cameraPreviewActivity.picturePath, cameraPreviewActivity.pictureRotation, true);
+                cameraPreviewActivity.saveBitmap(newbitmap);
+            } else {
+                newbitmap = cameraPreviewActivity.getBitmap(cameraPreviewActivity.picturePath, cameraPreviewActivity.pictureRotation, false);
+            }
+
+            cameraPreviewActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    cameraPreviewActivity.ivPreview.setImageBitmap(newbitmap);
+                }
+            });
+        }
     }
 }

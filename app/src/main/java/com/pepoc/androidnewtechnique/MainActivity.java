@@ -23,6 +23,7 @@ import com.pepoc.androidnewtechnique.bitmap.BitmapDemoActivity;
 import com.pepoc.androidnewtechnique.camera.CameraDemoActivity;
 import com.pepoc.androidnewtechnique.clipboard.ClipboardDemoActivity;
 import com.pepoc.androidnewtechnique.collection.BlockingQueueActivity;
+import com.pepoc.androidnewtechnique.constraintlayout.ConstraintLayoutDemoActivity;
 import com.pepoc.androidnewtechnique.customview.CanvasDemoActivity;
 import com.pepoc.androidnewtechnique.customview.SlideViewActivity;
 import com.pepoc.androidnewtechnique.customview.animation.AnimationDemoActivity;
@@ -115,6 +116,12 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Class<? extends Activity>> getData() {
         List<Class<? extends Activity>> classList = new ArrayList<>();
+<<<<<<< Updated upstream
+=======
+        classList.add(ConstraintLayoutDemoActivity.class);
+        classList.add(MemoryLeakActivity.class);
+        classList.add(SingleTaskDemoActivity.class);
+>>>>>>> Stashed changes
         classList.add(AnimationDemoActivity.class);
         classList.add(DrawMothedDemoActivity.class);
         classList.add(CameraDemoActivity.class);

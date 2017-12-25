@@ -44,6 +44,7 @@ public class MyClass {
 //        Log.i("== " + ("YYY" == "YYY"));
 
 
+<<<<<<< Updated upstream
         try {
             String str = null;
             System.out.print(MyClass.class.getName());
@@ -54,6 +55,49 @@ public class MyClass {
         } catch (Exception e) {
             e.printStackTrace();
         }
+=======
+//        try {
+//            String str = null;
+//            System.out.print(MyClass.class.getName());
+//            if (MyClass.class.getName().equals("com.example.MyClass3328")) {
+//                str = null;
+//            }
+//            System.out.print(str.hashCode());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+
+//        Date date = new Date();
+//        Locale.setDefault(Locale.US);
+//        DateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm:ss");
+//        DateFormat sdf_locale = new SimpleDateFormat("yyyy MMM dd HH:mm:ss",Locale.JAPANESE);
+//        System.out.println(sdf.format(date));
+//        System.out.println(sdf_locale.format(date));
+
+
+//        Date d1 = new Date();
+//        System.out.println("today is : " + d1.toString());
+//        Locale locItalian = new Locale("it", "ch");
+//        DateFormat df = DateFormat.getDateInstance(DateFormat.DAY_OF_YEAR_FIELD, locItalian);
+//        System.out.println("today is in Italian Language  in Switzerland Format : "
+//                        + df.format(d1));
+
+
+//        System.out.println((int)(8.9f / 3));
+
+
+        String a = "hello2";
+        final String b = "hello";
+        String d = "hello";
+        String c = b + 2;
+        String e = d + 2;
+        System.out.println((a == c));
+        System.out.println((a == e));
+
+        // true
+        // false
+>>>>>>> Stashed changes
     }
 
     static class MyThread extends Thread {
@@ -63,7 +107,7 @@ public class MyClass {
             super.run();
             for (int i = 0; i < 5; i++) {
                 num++;
-                Log.i("MyThread num === " + num);
+//                Log.i("MyThread num === " + num);
             }
         }
     }
