@@ -107,29 +107,29 @@ public class ScreenCapture {
             image.close();
 
 
-            if (width != Util.getScreenWidth(mContext) || rowPadding != 0) {
-                int[] pixel = new int[width + rowPadding / pixelStride];
-                bitmap.getPixels(pixel, 0, width + rowPadding / pixelStride, 0, 0, width + rowPadding / pixelStride, 1);
-                int leftPadding = 0;
-                int rightPadding = width + rowPadding / pixelStride;
-                for (int i = 0; i < pixel.length; i++) {
-                    if (pixel[i] != 0) {
-                        leftPadding = i;
-                        break;
-                    }
-                }
-                for (int i = pixel.length - 1; i >= 0; i--) {
-                    if (pixel[i] != 0) {
-                        rightPadding = i;
-                        break;
-                    }
-                }
-                width = Math.min(width, Util.getScreenWidth(mContext));
-                if (rightPadding - leftPadding > width) {
-                    rightPadding = width;
-                }
-                bitmap = Bitmap.createBitmap(bitmap, leftPadding, 0, rightPadding - leftPadding, height);
-            }
+//            if (width != Util.getScreenWidth(mContext) || rowPadding != 0) {
+//                int[] pixel = new int[width + rowPadding / pixelStride];
+//                bitmap.getPixels(pixel, 0, width + rowPadding / pixelStride, 0, 0, width + rowPadding / pixelStride, 1);
+//                int leftPadding = 0;
+//                int rightPadding = width + rowPadding / pixelStride;
+//                for (int i = 0; i < pixel.length; i++) {
+//                    if (pixel[i] != 0) {
+//                        leftPadding = i;
+//                        break;
+//                    }
+//                }
+//                for (int i = pixel.length - 1; i >= 0; i--) {
+//                    if (pixel[i] != 0) {
+//                        rightPadding = i;
+//                        break;
+//                    }
+//                }
+//                width = Math.min(width, Util.getScreenWidth(mContext));
+//                if (rightPadding - leftPadding > width) {
+//                    rightPadding = width;
+//                }
+//                bitmap = Bitmap.createBitmap(bitmap, leftPadding, 0, rightPadding - leftPadding, height);
+//
 
 
 

@@ -134,6 +134,8 @@ public class AntivirusScanView extends View {
 
                 lineRectF.left = shieldRectF.left - (shieldRectF.left * value);
                 lineRectF.right = shieldRectF.right + (getWidth() - shieldRectF.right) * value;
+
+                Thread.dumpStack();
                 invalidate();
             }
         });

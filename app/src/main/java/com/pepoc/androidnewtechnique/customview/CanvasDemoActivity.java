@@ -64,7 +64,13 @@ public class CanvasDemoActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-//        canvasSimple.cancelAnimation();
+        canvasSimple.cancel();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        canvasSimple.onDestroy();
     }
 
     private void init() {

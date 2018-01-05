@@ -75,7 +75,19 @@ public class Util {
 //        float density = dm.density;
 //        int width = dm.widthPixels;
         int height = dm.heightPixels;
-        return height;
+        return height + getNavigationBarHeight(context);
+    }
+
+    /**
+     * 获取navigation bar的高度
+     *
+     * @param
+     * @return
+     */
+    public static int getNavigationBarHeight(Context context) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        return resources.getDimensionPixelSize(resourceId);
     }
 
     public static int getScreenDensity(Context context) {

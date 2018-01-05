@@ -23,32 +23,18 @@ import android.widget.Button;
 import com.pepoc.androidnewtechnique.R;
 import com.pepoc.androidnewtechnique.log.LogManager;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 public class SpannableStringActivity extends AppCompatActivity implements View.OnClickListener {
 
-    @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.tv)
     TopicTextView tv;
-    @Bind(R.id.image_btn)
     Button imageBtn;
-    @Bind(R.id.url_btn)
     Button urlBtn;
-    @Bind(R.id.color_btn1)
     Button colorBtn1;
-    @Bind(R.id.color_btn2)
     Button colorBtn2;
-    @Bind(R.id.font_btn)
     Button fontBtn;
-    @Bind(R.id.style_btn)
     Button styleBtn;
-    @Bind(R.id.strike_btn)
     Button strikeBtn;
-    @Bind(R.id.underline_btn)
     Button underlineBtn;
-    @Bind(R.id.clickable_btn)
     Button clickableBtn;
 
     private int touchStatus = -1;
@@ -57,7 +43,7 @@ public class SpannableStringActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spannable_string);
-        ButterKnife.bind(this);
+//        ButterKnife.bind(this);
 
         init();
     }

@@ -10,18 +10,13 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.pepoc.androidnewtechnique.R;
 import com.pepoc.androidnewtechnique.log.LogManager;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.Subscriber;
 import rx.functions.Action1;
 
 public class RxBusActivity extends AppCompatActivity {
 
-    @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.btn_test)
     Button btnTest;
-    @Bind(R.id.btn_unsubscribe)
     Button btnUnsubscribe;
 
     private RxBus rxBus;
@@ -30,7 +25,6 @@ public class RxBusActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rx_bus);
-        ButterKnife.bind(this);
 
         init();
 
@@ -38,6 +32,10 @@ public class RxBusActivity extends AppCompatActivity {
 
     private void init() {
         setSupportActionBar(toolbar);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        btnTest = (Button) findViewById(R.id.btn_test);
+        btnUnsubscribe = (Button) findViewById(R.id.btn_unsubscribe);
 
         rxBus = new RxBus();
 

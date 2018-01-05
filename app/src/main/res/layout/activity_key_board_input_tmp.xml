@@ -69,10 +69,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true">
 
-                <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/et_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                <!--<android.support.v7.widget.AppCompatEditText-->
+                    <!--android:id="@+id/et_input"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"/>-->
             </FrameLayout>
 
             <!--直播消息列表-->
@@ -92,4 +92,9 @@
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="start"/>
 </RelativeLayout>

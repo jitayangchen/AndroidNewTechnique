@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -27,22 +25,25 @@ import rx.functions.Func1;
 
 public class RxJavaActivity extends AppCompatActivity {
 
-    @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.ll_content)
     LinearLayout llContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rx_java);
-        ButterKnife.bind(this);
 
         init();
     }
 
     private void init() {
         setSupportActionBar(toolbar);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        llContent = (LinearLayout) findViewById(R.id.ll_content);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        llContent = (LinearLayout) findViewById(R.id.ll_content);
 
         final Class<? extends RxJavaActivity> aClass = RxJavaActivity.this.getClass();
         Observable.from(getButtons()).subscribe(new Action1<String>() {
