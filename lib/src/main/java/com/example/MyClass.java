@@ -44,7 +44,6 @@ public class MyClass {
 //        Log.i("== " + ("YYY" == "YYY"));
 
 
-<<<<<<< Updated upstream
         try {
             String str = null;
             System.out.print(MyClass.class.getName());
@@ -55,7 +54,6 @@ public class MyClass {
         } catch (Exception e) {
             e.printStackTrace();
         }
-=======
 //        try {
 //            String str = null;
 //            System.out.print(MyClass.class.getName());
@@ -97,7 +95,6 @@ public class MyClass {
 
         // true
         // false
->>>>>>> Stashed changes
     }
 
     static class MyThread extends Thread {

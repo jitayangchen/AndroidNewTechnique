@@ -32,6 +32,7 @@ import com.pepoc.androidnewtechnique.customview.pulltorefresh.PullToRefreshActiv
 import com.pepoc.androidnewtechnique.eventbus.EventBusActivity;
 import com.pepoc.androidnewtechnique.file.FileActivity;
 import com.pepoc.androidnewtechnique.fragment.FragmentDemoActivity;
+import com.pepoc.androidnewtechnique.fragment.SingleTaskDemoActivity;
 import com.pepoc.androidnewtechnique.handler.HandlerDemoActivity;
 import com.pepoc.androidnewtechnique.java.JavaBaseActivity;
 import com.pepoc.androidnewtechnique.jni.JniActivity;
@@ -116,12 +117,9 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Class<? extends Activity>> getData() {
         List<Class<? extends Activity>> classList = new ArrayList<>();
-<<<<<<< Updated upstream
-=======
         classList.add(ConstraintLayoutDemoActivity.class);
         classList.add(MemoryLeakActivity.class);
         classList.add(SingleTaskDemoActivity.class);
->>>>>>> Stashed changes
         classList.add(AnimationDemoActivity.class);
         classList.add(DrawMothedDemoActivity.class);
         classList.add(CameraDemoActivity.class);
