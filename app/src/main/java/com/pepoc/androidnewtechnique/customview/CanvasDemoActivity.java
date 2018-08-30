@@ -115,6 +115,12 @@ public class CanvasDemoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                ivIcLauncher1.startAnimation(translateAnimation1);
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

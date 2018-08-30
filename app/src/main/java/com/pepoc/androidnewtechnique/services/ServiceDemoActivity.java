@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -32,6 +33,12 @@ public class ServiceDemoActivity extends AppCompatActivity {
     }
 
     private void init() {
+        findViewById(R.id.btn_start_other).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ServiceDemoActivity.this, ServiceDemo2Activity.class));
+            }
+        });
         findViewById(R.id.btn_start_service).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,11 +85,17 @@ public class ServiceDemoActivity extends AppCompatActivity {
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            ServicesDemo.LocalBinder binder = (ServicesDemo.LocalBinder) service;
-            ServicesDemo mService = binder.getService();
-            mService.print();
+//            ServicesDemo.LocalBinder binder = (ServicesDemo.LocalBinder) service;
+//            ServicesDemo mService = binder.getService();
+//            mService.print();
 
             iMyAidlInterface = IMyAidlInterface.Stub.asInterface(service);
+            try {
+                String name1 = iMyAidlInterface.getName();
+                LogManager.i("name = " + name1);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
 
         }
 

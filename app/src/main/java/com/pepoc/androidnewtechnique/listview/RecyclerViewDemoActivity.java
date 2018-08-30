@@ -126,6 +126,8 @@ public class RecyclerViewDemoActivity extends AppCompatActivity {
 
     private class AdapterDemo extends RecyclerView.Adapter<ViewHolder> {
 
+        private boolean isFirst = true;
+
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = View.inflate(parent.getContext(), R.layout.item_recycler_view, null);
@@ -134,11 +136,13 @@ public class RecyclerViewDemoActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
+
             holder.textView.setText(String.valueOf(position));
         }
 
         @Override
         public int getItemCount() {
+
             return count;
         }
     }
@@ -148,10 +152,14 @@ public class RecyclerViewDemoActivity extends AppCompatActivity {
         TextView textView;
         ConstrictionView constrictionView;
         View ivTarget;
+        boolean isFirst = true;
 
         ViewHolder(View itemView) {
             super(itemView);
-
+            if (isFirst) {
+                Thread.dumpStack();
+                isFirst = false;
+            }
             textView = (TextView) itemView.findViewById(R.id.text_view);
             constrictionView = (ConstrictionView) itemView.findViewById(R.id.constriction_view);
             ivTarget = itemView.findViewById(R.id.iv_target);

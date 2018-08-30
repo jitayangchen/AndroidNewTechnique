@@ -2,6 +2,7 @@ package com.pepoc.androidnewtechnique.services;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -16,7 +17,8 @@ import cn.com.findfine.servicedemo.IMyAidlInterface;
  */
 public class ServicesDemo extends Service {
 
-    private final IBinder mBinder = new LocalBinder();
+//    private final IBinder mBinder = new LocalBinder();
+    private final RemoteBinder mBinder = new RemoteBinder();
 
     @Override
     public void onCreate() {
@@ -29,21 +31,21 @@ public class ServicesDemo extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         LogManager.i("----------onStartCommand---------");
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                int count = 0;
-                while (true) {
-                    LogManager.i("onStartCommand count === " + count++);
-                    try {
-                        sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }.start();
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                super.run();
+//                int count = 0;
+//                while (true) {
+//                    LogManager.i("onStartCommand count === " + count++);
+//                    try {
+//                        sleep(1000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }.start();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -58,6 +60,18 @@ public class ServicesDemo extends Service {
     public boolean onUnbind(Intent intent) {
         LogManager.i("----------onUnbind---------");
         return super.onUnbind(intent);
+    }
+
+    @Override
+    public void onRebind(Intent intent) {
+        super.onRebind(intent);
+        LogManager.i("----------onRebind---------");
+    }
+
+    @Override
+    public void unbindService(ServiceConnection conn) {
+        super.unbindService(conn);
+        LogManager.i("----------unbindService---------");
     }
 
     @Override
@@ -81,7 +95,8 @@ public class ServicesDemo extends Service {
 
         @Override
         public String getName() throws RemoteException {
-            return null;
+            print();
+            return "HAHAHA XIXIXI";
         }
     }
 

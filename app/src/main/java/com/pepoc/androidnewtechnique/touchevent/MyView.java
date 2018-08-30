@@ -74,6 +74,7 @@ public class MyView extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 LogManager.i(TAG, "onTouchEvent ACTION_DOWN");
+                Thread.dumpStack();
                 break;
             case MotionEvent.ACTION_MOVE:
 //                LogManager.i(TAG, "onTouchEvent ACTION_MOVE");
@@ -85,6 +86,7 @@ public class MyView extends View {
                 LogManager.i(TAG, "onTouchEvent ACTION_CANCEL");
                 break;
         }
-        return super.onTouchEvent(event);
+        return false;
+//        return super.onTouchEvent(event);
     }
 }

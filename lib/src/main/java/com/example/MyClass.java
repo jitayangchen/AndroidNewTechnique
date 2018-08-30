@@ -1,5 +1,7 @@
 package com.example;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 
 public class MyClass {
@@ -44,16 +46,16 @@ public class MyClass {
 //        Log.i("== " + ("YYY" == "YYY"));
 
 
-        try {
-            String str = null;
-            System.out.print(MyClass.class.getName());
-            if (MyClass.class.getName().equals("com.example.MyClass3328")) {
-                str = null;
-            }
-            System.out.print(str.hashCode());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String str = null;
+//            System.out.print(MyClass.class.getName());
+//            if (MyClass.class.getName().equals("com.example.MyClass3328")) {
+//                str = null;
+//            }
+//            System.out.print(str.hashCode());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 //        try {
 //            String str = null;
 //            System.out.print(MyClass.class.getName());
@@ -85,18 +87,53 @@ public class MyClass {
 //        System.out.println((int)(8.9f / 3));
 
 
-        String a = "hello2";
-        final String b = "hello";
-        String d = "hello";
-        String c = b + 2;
-        String e = d + 2;
-        System.out.println((a == c));
-        System.out.println((a == e));
+//        String a = "hello2";
+//        final String b = "hello";
+//        String d = "hello";
+//        String c = b + 2;
+//        String e = d + 2;
+//        System.out.println((a == c));
+//        System.out.println((a == e));
+//        System.out.println((a == b));
+
+//        String s1 = "a";
+//        String s2 = "b";
+//        String s = s1 + s2;
+//        System.out.println(s == a);
+//        System.out.println(s.intern() == a);
+//        System.out.println(s.intern() == a.intern());
 
         // true
         // false
-    }
 
+//        String a = "a1";
+//        String b = "a" + 1;
+//        System.out.println(a == b);
+
+
+
+//        String time = "2018-04-24 11:46:27";
+//        int index = time.lastIndexOf(':');
+//        Log.i("time = " + time.substring(0, index));
+////        Log.i("time String = " + time.lastIndexOf(":"));
+//
+//        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        try {
+//            Date date = sdf.parse(time);
+//            Log.i("" + date.getTime());
+//            date = new Date(date.getTime());
+//            Log.i(sdf.format(date));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+
+
+
+        String str = Encrypt("yngcen6881090", "SHA-1");
+        Log.i("str = " + str);
+
+    }
+    private static String a = new String("ab");
     static class MyThread extends Thread {
 
         @Override
@@ -120,5 +157,46 @@ public class MyClass {
         todayStart.set(Calendar.SECOND, 0);
         todayStart.set(Calendar.MILLISECOND, 0);
         return todayStart.getTime().getTime();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    public static String Encrypt(String strSrc, String encName) {
+        MessageDigest md=null;
+        String strDes=null;
+        byte[] bt=strSrc.getBytes();
+        try {
+            if (encName==null||encName.equals("")) {
+                encName="MD5";
+            }
+            md= MessageDigest.getInstance(encName);
+            md.update(bt);
+            strDes=bytes2Hex(md.digest());  //to HexString
+        }
+        catch (NoSuchAlgorithmException e) {
+            return null;
+        }
+        return strDes;
+    }
+    public static String bytes2Hex(byte[]bts) {
+        String des="";
+        String tmp=null;
+        for (int i=0;i<bts.length;i++) {
+            tmp=(Integer.toHexString(bts[i] & 0xFF));
+            if (tmp.length()==1) {
+                des+="0";
+            }
+            des+=tmp;
+        }
+        return des;
     }
 }

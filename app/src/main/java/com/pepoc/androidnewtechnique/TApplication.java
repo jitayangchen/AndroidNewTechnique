@@ -10,25 +10,30 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.multidex.MultiDexApplication;
+import android.util.Log;
 
 import com.alipay.euler.andfix.patch.PatchManager;
 import com.orhanobut.logger.AndroidLogTool;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 import com.pepoc.androidnewtechnique.log.LogManager;
+import com.pepoc.androidnewtechnique.proxy.AMSProxy;
 import com.pepoc.androidnewtechnique.services.notification.MyNotificationListenerService;
 import com.pepoc.androidnewtechnique.util.HomeListenerHelper;
 import com.squareup.leakcanary.LeakCanary;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by yangchen on 16-1-12.
  */
-public class TApplication extends Application implements Application.ActivityLifecycleCallbacks {
+public class TApplication extends MultiDexApplication implements Application.ActivityLifecycleCallbacks {
 
     public static String CONFIG = "default";
     private static Context context;
@@ -40,6 +45,12 @@ public class TApplication extends Application implements Application.ActivityLif
         context = this;
         initLogger();
         initAndFix();
+
+        try {
+            throw new Exception("FixApplication stack");
+        } catch (Exception e) {
+            Log.e("fix", "lalala", e);
+        }
 
 //        registerActivityLifecycleCallbacks(this);
 
@@ -63,6 +74,34 @@ public class TApplication extends Application implements Application.ActivityLif
 //                super.println(x);
 //            }
 //        });
+
+
+
+        hookAMS();
+    }
+
+    private void hookAMS() {
+        try {
+            Class activityManagerNativeClazz = Class.forName("android.app.ActivityManagerNative");
+            Field gDefaultField = activityManagerNativeClazz.getDeclaredField("gDefault");
+            gDefaultField.setAccessible(true);
+            Object gDefault = gDefaultField.get(null); // 获取gDefault实例，由于是静态类型的属性，所以这里直接传递null参数
+
+// 下面通过反射执行gDefault.get();操作，最终返回IActivityManager，也就是ActivityManagerService的实例
+            Class singleTonClazz = Class.forName("android.util.Singleton");
+            Field mInstanceField = singleTonClazz.getDeclaredField("mInstance");
+            mInstanceField.setAccessible(true);
+            Object iActivityManager = mInstanceField.get(gDefault);
+
+            Class iActivityManagerClazz = Class.forName("android.app.IActivityManager");
+// 指定被代理对象的类加载器
+// 指定被代理对象所实现的接口，这里就是代理IActivityManager
+// 表示这个动态代理对象在调用方法的时候，会关联到哪一个InvocationHandler对象上
+            Object myProxy = Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class<?>[]{iActivityManagerClazz}, new AMSProxy(iActivityManager));
+            mInstanceField.set(gDefault, myProxy);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static Context getContext() {

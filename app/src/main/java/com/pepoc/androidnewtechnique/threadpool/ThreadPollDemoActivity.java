@@ -51,11 +51,11 @@ public class ThreadPollDemoActivity extends AppCompatActivity {
         ExecutorService cachedThreadPoll = Executors.newCachedThreadPool();
 
         for (int i = 0; i < 10; i++) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
             cachedThreadPoll.execute(new MyThread(i));
         }
     }

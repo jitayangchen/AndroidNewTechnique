@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.ViewPropertyAnimator;
 import android.view.animation.Interpolator;
 
 import com.pepoc.androidnewtechnique.R;
+import com.pepoc.androidnewtechnique.log.LogManager;
 
 public class AnimationDemoActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -67,11 +69,15 @@ public class AnimationDemoActivity extends AppCompatActivity implements View.OnC
     }
 
     private void valueAnimatorTest() {
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 100f);
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 10f, 20f, 30f, 40f, 50f, 100f);
+//        valueAnimator.setInterpolator(new CustomInterpolator());
+        valueAnimator.setInterpolator(null);
+        valueAnimator.setEvaluator(new CustomTypeEvaluator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float animatedFraction = (float) animation.getAnimatedValue();
+                LogManager.i("animatedFraction = " + animatedFraction);
                 btnAnimationTest.setTranslationX(animatedFraction);
             }
         });
@@ -108,7 +114,7 @@ public class AnimationDemoActivity extends AppCompatActivity implements View.OnC
             }
         });
 
-        valueAnimator.setDuration(300);
+        valueAnimator.setDuration(1000);
         valueAnimator.start();
     }
 
@@ -116,6 +122,7 @@ public class AnimationDemoActivity extends AppCompatActivity implements View.OnC
 
         @Override
         public float getInterpolation(float input) {
+            LogManager.i("animatedFraction input = " + input);
             int p0 = 0;
             int p1 = 1;
             int m0 = 4;
@@ -132,6 +139,14 @@ public class AnimationDemoActivity extends AppCompatActivity implements View.OnC
         }
     }
 
+    class CustomTypeEvaluator implements TypeEvaluator {
+
+        @Override
+        public Object evaluate(float fraction, Object startValue, Object endValue) {
+            LogManager.i("animatedFraction fraction = " + fraction + " - " + startValue + " : " + endValue);
+            return fraction;
+        }
+    }
 
 
 }

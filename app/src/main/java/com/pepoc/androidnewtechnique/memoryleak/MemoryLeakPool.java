@@ -15,6 +15,8 @@ public class MemoryLeakPool {
 
     private static List<Context> contextList = new ArrayList<>();
 
+    private int count = 0;
+
     private MemoryLeakPool() {
 
     }
@@ -25,5 +27,9 @@ public class MemoryLeakPool {
 
     public static void addContext(Context context) {
         contextList.add(context);
+    }
+
+    public int getCount() {
+        return count++;
     }
 }

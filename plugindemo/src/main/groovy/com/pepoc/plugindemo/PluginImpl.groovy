@@ -23,6 +23,7 @@ class PluginImpl implements Plugin<Project> {
                     println dexTask
                     println proguardTask
                     println "**************** ${variant.name.capitalize()} ********************"
+
             }
         }
     }

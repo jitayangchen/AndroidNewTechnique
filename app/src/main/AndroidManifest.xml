@@ -34,6 +34,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
         <activity
             android:name=".realm.RealmActivity"
@@ -46,6 +50,7 @@
         <activity
             android:name=".rxbinding.RxBindingActivity"
             android:label="@string/title_activity_rx_binding"
+            android:taskAffinity=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".rxbus.RxBusActivity"
@@ -79,7 +84,7 @@
             android:name=".services.ServicesDemo"
             android:enabled="true"
             android:exported="true"
-            android:process="com.pepoc.ServiceDemo" />
+            android:process=":remote" />
         <service android:name=".services.accessibilityservice.MyAccessibilityService">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
@@ -170,7 +175,22 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".memoryleak.MemoryLeakActivity" />
         <activity android:name=".pool.ObjectsPoolDemoActivity" />
-        <activity android:name=".constraintlayout.ConstraintLayoutDemoActivity"></activity>
+        <activity android:name=".constraintlayout.ConstraintLayoutDemoActivity" />
+        <activity android:name=".recyclerview.viewlistener.ViewListenerActivity" />
+        <activity android:name=".services.ServiceDemo2Activity" />
+        <activity android:name=".activitytask.ATestActivity" />
+        <activity
+            android:name=".activitytask.BTestActivity"
+            android:launchMode="singleInstance"
+            android:taskAffinity="com.hahaha.lalala" />
+        <activity
+            android:name=".activitytask.CTestActivity"
+            android:launchMode="singleInstance"
+            android:taskAffinity="com.hahaha.lalala" />
+        <activity android:name=".activitytask.DTestActivity" />
+        <activity android:name=".recyclerview.snaphelper.RemoveSnapActivity" />
+        <activity android:name=".okhttp.retrofit.RetrofitActivity" />
+        <activity android:name=".customview.safemobile.SafeTestActivity"></activity>
     </application>
 
 </manifest>

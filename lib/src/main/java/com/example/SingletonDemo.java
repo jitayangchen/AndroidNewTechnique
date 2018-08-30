@@ -16,7 +16,7 @@ public class SingletonDemo {
         }
     }
 
-    static synchronized SingletonDemo getInstance() {
+    public static synchronized SingletonDemo getInstance() {
         if (instance == null) {
 //            instance = new SingletonDemo();
             instance = InstanceCreate.instance;
@@ -26,8 +26,20 @@ public class SingletonDemo {
         return instance;
     }
 
-    static class InstanceCreate {
-        public final static SingletonDemo instance = new SingletonDemo();
+    public static SingletonDemo get() {
+        if (instance == null) {
+            synchronized (SingletonDemo.class) {
+                if (instance == null) {
+                    instance = new SingletonDemo();
+                }
+            }
+        }
+
+        return instance;
+    }
+
+    private static class InstanceCreate {
+        final static SingletonDemo instance = new SingletonDemo();
     }
 
     public void function(String threadName) {

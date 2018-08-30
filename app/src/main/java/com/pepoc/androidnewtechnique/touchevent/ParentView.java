@@ -8,8 +8,6 @@ import android.widget.RelativeLayout;
 
 import com.pepoc.androidnewtechnique.log.LogManager;
 
-import java.util.ArrayList;
-
 /**
  * Created by Yangchen on 2016/5/11.
  */
@@ -57,10 +55,10 @@ public class ParentView extends RelativeLayout {
 //        LogManager.i("ev.getActionMasked() === " + ev.getActionMasked());
 //        MotionEventCompat.getActionMasked(ev);
 
-        ArrayList<View> touchables = getTouchables();
-        for (View view : touchables) {
-            view.setVisibility(View.GONE);
-        }
+//        ArrayList<View> touchables = getTouchables();
+//        for (View view : touchables) {
+//            view.setVisibility(View.GONE);
+//        }
         switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 LogManager.i(TAG, "dispatchTouchEvent ACTION_DOWN");
@@ -103,13 +101,13 @@ public class ParentView extends RelativeLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        ArrayList<View> touchables = getTouchables();
-        for (View view : touchables) {
-            view.setVisibility(View.GONE);
-        }
+//        ArrayList<View> touchables = getTouchables();
+//        for (View view : touchables) {
+//            view.setVisibility(View.GONE);
+//        }
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-//                Thread.dumpStack();
+                Thread.dumpStack();
                 LogManager.i(TAG, "onTouchEvent ACTION_DOWN");
                 break;
             case MotionEvent.ACTION_MOVE:

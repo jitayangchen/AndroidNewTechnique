@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import com.jakewharton.rxbinding.view.RxView;
 import com.pepoc.androidnewtechnique.AppIsBackground.AppGroundActivity;
 import com.pepoc.androidnewtechnique.SpannableString.SpannableStringActivity;
+import com.pepoc.androidnewtechnique.activitytask.ATestActivity;
 import com.pepoc.androidnewtechnique.andfix.AndfixActivity;
 import com.pepoc.androidnewtechnique.androidbase.RotateActivity;
 import com.pepoc.androidnewtechnique.asynctask.AsyncTaskDemoActivity;
@@ -29,6 +31,7 @@ import com.pepoc.androidnewtechnique.customview.SlideViewActivity;
 import com.pepoc.androidnewtechnique.customview.animation.AnimationDemoActivity;
 import com.pepoc.androidnewtechnique.customview.draw.DrawMothedDemoActivity;
 import com.pepoc.androidnewtechnique.customview.pulltorefresh.PullToRefreshActivity;
+import com.pepoc.androidnewtechnique.customview.safemobile.SafeTestActivity;
 import com.pepoc.androidnewtechnique.eventbus.EventBusActivity;
 import com.pepoc.androidnewtechnique.file.FileActivity;
 import com.pepoc.androidnewtechnique.fragment.FragmentDemoActivity;
@@ -44,9 +47,12 @@ import com.pepoc.androidnewtechnique.matrix.MatrixActivity;
 import com.pepoc.androidnewtechnique.memoryleak.MemoryLeakActivity;
 import com.pepoc.androidnewtechnique.ocr.OcrDemoActivity;
 import com.pepoc.androidnewtechnique.okhttp.OkHttpActivity;
+import com.pepoc.androidnewtechnique.okhttp.retrofit.RetrofitActivity;
 import com.pepoc.androidnewtechnique.process.ProcessDemoActivity;
 import com.pepoc.androidnewtechnique.realm.RealmActivity;
 import com.pepoc.androidnewtechnique.recyclerview.RecyclerViewActivity;
+import com.pepoc.androidnewtechnique.recyclerview.snaphelper.RemoveSnapActivity;
+import com.pepoc.androidnewtechnique.recyclerview.viewlistener.ViewListenerActivity;
 import com.pepoc.androidnewtechnique.rxbinding.RxBindingActivity;
 import com.pepoc.androidnewtechnique.rxbus.RxBusActivity;
 import com.pepoc.androidnewtechnique.rxjava.RxJavaActivity;
@@ -67,6 +73,8 @@ import com.pepoc.androidnewtechnique.viewstub.ViewStubDemoActivity;
 import com.pepoc.androidnewtechnique.widget.WidgetActivity;
 import com.pepoc.androidnewtechnique.wifi.WifiTestActivity;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,12 +94,51 @@ public class MainActivity extends AppCompatActivity {
         init();
 
         LogManager.i(Environment.getExternalStorageDirectory().getPath());
+
+        ClassLoader loader = MainActivity.class.getClassLoader();
+        while (loader != null) {
+            Log.d("classloader",loader.toString());//1
+            loader = loader.getParent();
+        }
+
+
+        for (Class<?> clazz = this.getClass(); clazz != null; clazz = clazz.getSuperclass()) {
+            try {
+                Field mTokenField = clazz.getDeclaredField("mToken");
+
+                mTokenField.setAccessible(true);
+                Object o = mTokenField.get(this);
+                LogManager.i("fix", o == null ? "null" : o.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            final Class<?> resourcesManagerClass = Class.forName("android.app.ResourcesManager");
+            Method mGetInstance = resourcesManagerClass.getDeclaredMethod("getInstance");
+
+            if (!mGetInstance.isAccessible()) {
+                mGetInstance.setAccessible(true);
+            }
+
+            Method activityResources = resourcesManagerClass.getDeclaredMethod("getOrCreateActivityResourcesStructLocked");
+            if (!activityResources.isAccessible()) {
+                activityResources.setAccessible(true);
+            }
+
+            Object resourcesManager = mGetInstance.invoke(null);
+
+            Object invoke = activityResources.invoke(resourcesManager);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void init() {
-        setSupportActionBar(toolbar);
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         llMainContent = (LinearLayout) findViewById(R.id.ll_main_content);
 
         Observable.from(getData()).subscribe(new Action1<Class<? extends Activity>>() {
@@ -116,6 +163,11 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Class<? extends Activity>> getData() {
         List<Class<? extends Activity>> classList = new ArrayList<>();
+        classList.add(SafeTestActivity.class);
+        classList.add(RetrofitActivity.class);
+        classList.add(RemoveSnapActivity.class);
+        classList.add(ATestActivity.class);
+        classList.add(ViewListenerActivity.class);
         classList.add(ConstraintLayoutDemoActivity.class);
         classList.add(MemoryLeakActivity.class);
         classList.add(SingleTaskDemoActivity.class);

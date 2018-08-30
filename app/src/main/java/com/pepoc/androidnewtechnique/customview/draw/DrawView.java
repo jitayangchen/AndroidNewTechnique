@@ -49,7 +49,7 @@ public class DrawView extends View {
         paint.setStrokeWidth(3);
 
         paint1 = new Paint(paint);
-        paint1.setStyle(Paint.Style.FILL);
+        paint1.setStyle(Paint.Style.STROKE);
         paint1.setColor(color);
 
         arcRectF = new RectF(200, 500, 700, 1000);

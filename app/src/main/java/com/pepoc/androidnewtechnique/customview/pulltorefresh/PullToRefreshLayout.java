@@ -64,10 +64,11 @@ public class PullToRefreshLayout extends ViewGroup {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        final int count = getChildCount();
-        for (int i = 0; i < count; i++) {
-            getChildAt(i).measure(widthMeasureSpec, heightMeasureSpec);
-        }
+//        final int count = getChildCount();
+//        for (int i = 0; i < count; i++) {
+//            getChildAt(i).measure(widthMeasureSpec, heightMeasureSpec);
+//        }
+        measureChildren(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override

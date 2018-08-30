@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.pepoc.androidnewtechnique.R;
 import com.pepoc.androidnewtechnique.log.LogManager;
 
-import org.simple.eventbus.Subscriber;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class EventBusActivity extends AppCompatActivity {
 
@@ -27,7 +29,7 @@ public class EventBusActivity extends AppCompatActivity {
     private void init() {
 //        setSupportActionBar(toolbar);
 //
-//        EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this);
 //
 //        RxView.clicks(btnAndroidEventbus).subscribe(new Action1<Void>() {
 //            @Override
@@ -37,7 +39,7 @@ public class EventBusActivity extends AppCompatActivity {
 //        });
     }
 
-    @Subscriber
+    @Subscribe(threadMode = ThreadMode.MAIN)
     private void lalala(Object object) {
         LogManager.i("GAGAGA");
     }
