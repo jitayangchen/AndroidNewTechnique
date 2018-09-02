@@ -1,5 +1,8 @@
 package com.pepoc.androidnewtechnique.customview.safemobile;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,6 +10,7 @@ import android.graphics.Paint;
 import android.support.v4.util.Pools;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 
 import com.pepoc.androidnewtechnique.util.DensityUtil;
 
@@ -62,7 +66,7 @@ public class RippleView extends View {
         super(context, attrs, defStyleAttr);
         // 获取用户配置属性
         mColor = Color.WHITE;
-        mSpeed = 2;
+        mSpeed = 4;
         mDensity = 70;
         mIsFill = false;
 
@@ -93,6 +97,39 @@ public class RippleView extends View {
 
         // 设置View的圆为半透明
         setBackgroundColor(Color.TRANSPARENT);
+
+
+
+
+
+
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.setDuration(2000);
+        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+//                animatedFraction = (float) animation.getAnimatedValue();
+
+                invalidate();
+            }
+        });
+
+        valueAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                super.onAnimationStart(animation);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                super.onAnimationRepeat(animation);
+            }
+        });
+
+//        valueAnimator.setStartDelay();
+        valueAnimator.start();
     }
 
     @Override
@@ -136,24 +173,25 @@ public class RippleView extends View {
         if (reuseIndex != -1) {
             removeCircle = mRipples.remove(reuseIndex);
             reuseIndex = -1;
+            SIMPLE_POOL.release(removeCircle);
         }
 
-        // 里面添加圆
         if (mRipples.size() > 0) {
-            // 控制第二个圆出来的间距
             if (mRipples.get(mRipples.size() - 1).radius > DensityUtil.dip2px(mContext, mDensity)) {
-                if (mRipples.size() < 2) {
+
+                Circle acquire = SIMPLE_POOL.acquire();
+                if (acquire == null) {
                     mRipples.add(new Circle(CIRCLE_RADIUS, 255));
-                } else if (removeCircle != null) {
-                    removeCircle.radius = CIRCLE_RADIUS;
-                    removeCircle.alpha = 255;
-                    mRipples.add(removeCircle);
+                } else {
+                    acquire.radius = CIRCLE_RADIUS;
+                    acquire.alpha = 255;
+                    mRipples.add(acquire);
                 }
             }
         }
 
 
-        invalidate();
+//        invalidate();
     }
 
 
