@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".customview.safemobile.SafeTestActivity"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorAccent">
 
-    <com.pepoc.androidnewtechnique.customview.safemobile.SafeSimpleView
+    <com.pepoc.androidnewtechnique.customview.safemobile.RippleView
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
