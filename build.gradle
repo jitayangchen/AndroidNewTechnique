@@ -12,9 +12,10 @@ buildscript {
             url 'https://maven.google.com/'
             name 'Google'
         }
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.1.4'
 //        classpath "io.realm:realm-gradle-plugin:1.0.0"
 //        classpath 'me.tatarka:gradle-retrolambda:3.2.4'
         classpath 'com.pepoc.plugindemo.plugin:plugindemo:1.0.0'
@@ -31,11 +32,16 @@ allprojects {
         maven { url "https://jitpack.io" }
         mavenCentral()
         google()
+
+//        maven {
+//            url "http://10.18.94.189:8081/repository/maven-snapshots/"
+//            url "http://localhost:8081/repository/maven-public/"
+//        }
     }
 }
 
 ext {
-    compileSdkVersion = 26
+    compileSdkVersion = 28
     buildToolsVersion = "26.0.2"
 }
 

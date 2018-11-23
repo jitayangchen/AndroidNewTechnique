@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+//        MavenTest.mavenTest();
     }
 
     private void init() {
@@ -163,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Class<? extends Activity>> getData() {
         List<Class<? extends Activity>> classList = new ArrayList<>();
+        classList.add(CanvasDemoActivity.class);
         classList.add(SafeTestActivity.class);
         classList.add(RetrofitActivity.class);
         classList.add(RemoveSnapActivity.class);
@@ -196,7 +198,6 @@ public class MainActivity extends AppCompatActivity {
         classList.add(WidgetActivity.class);
         classList.add(ScrollerActivity.class);
         classList.add(MatrixActivity.class);
-        classList.add(CanvasDemoActivity.class);
         classList.add(EventBusActivity.class);
         classList.add(RealmActivity.class);
         classList.add(RxBindingActivity.class);

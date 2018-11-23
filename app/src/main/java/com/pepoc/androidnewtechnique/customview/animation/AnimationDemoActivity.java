@@ -69,10 +69,11 @@ public class AnimationDemoActivity extends AppCompatActivity implements View.OnC
     }
 
     private void valueAnimatorTest() {
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 10f, 20f, 30f, 40f, 50f, 100f);
-//        valueAnimator.setInterpolator(new CustomInterpolator());
-        valueAnimator.setInterpolator(null);
-        valueAnimator.setEvaluator(new CustomTypeEvaluator());
+//        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 10f, 20f, 30f, 40f, 50f, 100f);
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, -0.5f);
+        valueAnimator.setInterpolator(new CustomInterpolator());
+//        valueAnimator.setInterpolator(null);
+//        valueAnimator.setEvaluator(new CustomTypeEvaluator());
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {

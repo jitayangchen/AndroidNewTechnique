@@ -20,7 +20,7 @@ import com.pepoc.androidnewtechnique.log.LogManager;
 
 public class CanvasDemoActivity extends AppCompatActivity {
 
-    private AntivirusScanView canvasSimple;
+    private AntivirusScanView canvasSimple, canvasSimpleTest, canvasSimpleTest1, canvasSimpleTest2;
     private Handler handler = new Handler();
     private AppCompatSeekBar seekBar1;
     private AppCompatSeekBar seekBar2;
@@ -56,6 +56,9 @@ public class CanvasDemoActivity extends AppCompatActivity {
             @Override
             public void run() {
                 canvasSimple.startAnimation();
+//                canvasSimpleTest.startAnimation();
+//                canvasSimpleTest1.startAnimation();
+//                canvasSimpleTest2.startAnimation();
             }
         }, 200);
     }
@@ -76,6 +79,9 @@ public class CanvasDemoActivity extends AppCompatActivity {
     private void init() {
         waterRipple = (BgWaterRipple) findViewById(R.id.water_ripple);
         canvasSimple = (AntivirusScanView) findViewById(R.id.canvas_simple);
+//        canvasSimpleTest = (AntivirusScanView) findViewById(R.id.canvas_simple_test);
+//        canvasSimpleTest1 = (AntivirusScanView) findViewById(R.id.canvas_simple_test1);
+//        canvasSimpleTest2 = (AntivirusScanView) findViewById(R.id.canvas_simple_test2);
         seekBar1 = (AppCompatSeekBar) findViewById(R.id.seek_bar_1);
         seekBar2 = (AppCompatSeekBar) findViewById(R.id.seek_bar_2);
         seekBar3 = (AppCompatSeekBar) findViewById(R.id.seek_bar_3);

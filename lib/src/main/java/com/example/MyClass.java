@@ -129,10 +129,41 @@ public class MyClass {
 
 
 
-        String str = Encrypt("yngcen6881090", "SHA-1");
-        Log.i("str = " + str);
+//        String str = Encrypt("yngcen6881090", "SHA-1");
+//        Log.i("str = " + str);
+
+//        for (int i = 0; i <= 100; i++) {
+//            int r = (int) Math.sin(3 * Math.PI * i);
+//            Log.i("r === " + r);
+//        }
+
+//        double r = Math.sin(2 * Math.PI * 1);
+//        Log.i("r === " + r);
+
+//        for (float i = 0f; i >= -0.5f; i-=0.1f) {
+//            float r = (float) (Math.cos((i + 1) * Math.PI) / 2.0f) + 0.5f;
+//            Log.i("i === " + i + " --- r === " + r);
+//        }
+
+        funtest(0);
 
     }
+
+    private static void funtest(int i) {
+        try {
+            float r = 1 / i;
+
+            Log.i("hahaha");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            Log.i("finally --- ");
+        }
+
+        Log.i("bottom --- ");
+
+    }
+
     private static String a = new String("ab");
     static class MyThread extends Thread {
 

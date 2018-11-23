@@ -105,6 +105,7 @@ public class AntivirusScanView extends View {
 //        shieldWidth = getContext().getResources().getDimension(R.dimen.antivirus_scan_view_shield_width);
 //        shieldHeight = getContext().getResources().getDimension(R.dimen.antivirus_scan_view_shield_height);
 
+        setLayerType(LAYER_TYPE_HARDWARE, null);
         initVirusData();
 
         random = new Random();
@@ -263,8 +264,8 @@ public class AntivirusScanView extends View {
             }
         }*/
 
-        int canvasWidth = canvas.getWidth();
-        int canvasHeight = canvas.getHeight();
+        int canvasWidth = getWidth();
+        int canvasHeight = getHeight();
         int layerId = canvas.saveLayer(0, 0, canvasWidth, canvasHeight, null, Canvas.ALL_SAVE_FLAG);
 
         canvas.drawBitmap(bmScanningShield, null, shieldRectF, null);
