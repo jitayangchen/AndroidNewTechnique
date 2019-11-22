@@ -4,16 +4,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.pepoc.androidnewtechnique.R;
 import com.pepoc.androidnewtechnique.log.LogManager;
 
-public class BezierCurveActivity extends AppCompatActivity {
+public class BezierCurveActivity extends AppCompatActivity implements BezierCurveViewPath.PointUpdateListener {
 
-    private BezierCurveView bezierCurveView;
+    private BezierCurveViewPath bezierCurveView;
     private Button btnRecordData;
     private ImageView ivTest;
+    private EditText etPointInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,7 @@ public class BezierCurveActivity extends AppCompatActivity {
     }
 
     private void init() {
-        bezierCurveView = (BezierCurveView) findViewById(R.id.bezier_curve_view);
+        bezierCurveView = (BezierCurveViewPath) findViewById(R.id.bezier_curve_view);
         btnRecordData = (Button) findViewById(R.id.btn_record_data);
         ivTest = (ImageView) findViewById(R.id.iv_test);
 
@@ -50,5 +52,14 @@ public class BezierCurveActivity extends AppCompatActivity {
 //                LogManager.i("endPoint = " + (endPoint[0]) + " --- " + (imageViewH - endPoint[1]));
             }
         });
+
+        etPointInfo = findViewById(R.id.et_point_info);
+
+        bezierCurveView.setPointUpdateListener(this);
+    }
+
+    @Override
+    public void updatePointInfo(String info) {
+        etPointInfo.setText(info);
     }
 }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".customview.moment.AnnulusViewActivity">
+
+    <!--<com.pepoc.androidnewtechnique.customview.moment.AnnulusView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
+
+    <com.pepoc.androidnewtechnique.customview.moment.LineChartView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="open"/>
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="close"/>
+
+        <SeekBar
+            android:id="@+id/seek_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="50"/>
+
+        <Button
+            android:id="@+id/btn_get_brightness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取亮度"/>
+
+        <Button
+            android:id="@+id/vibrate_short"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="vibrate short"/>
+
+        <Button
+            android:id="@+id/vibrate_long"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="vibrate long"/>
+
+        <Button
+            android:id="@+id/btn_set_clipboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="set Clipboard"/>
+
+        <Button
+            android:id="@+id/btn_get_clipboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="get Clipboard"/>
+    </LinearLayout>
+</LinearLayout>

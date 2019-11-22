@@ -44,27 +44,27 @@ public class TApplication extends MultiDexApplication implements Application.Act
         super.onCreate();
         context = this;
         initLogger();
-        initAndFix();
+//        initAndFix();
 
-        try {
-            throw new Exception("FixApplication stack");
-        } catch (Exception e) {
-            Log.e("fix", "lalala", e);
-        }
+//        try {
+//            throw new Exception("FixApplication stack");
+//        } catch (Exception e) {
+//            Log.e("fix", "lalala", e);
+//        }
 
 //        registerActivityLifecycleCallbacks(this);
 
-        LogManager.i("------------onCreate()----------- Pid = " + android.os.Process.myPid());
+//        LogManager.i("------------onCreate()----------- Pid = " + android.os.Process.myPid());
 
         registerHomeReceiver();
 
 
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            // This process is dedicated to LeakCanary for heap analysis.
+//            // You should not init your app in this process.
+//            return;
+//        }
+//        LeakCanary.install(this);
 
 //        toggleNotificationListenerService();
 

@@ -3,6 +3,7 @@ package com.pepoc.androidnewtechnique.SpannableString;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -51,6 +52,17 @@ public class SpannableStringActivity extends AppCompatActivity implements View.O
     private void init() {
         setSupportActionBar(toolbar);
 
+        imageBtn = findViewById(R.id.image_btn);
+        urlBtn = findViewById(R.id.url_btn);
+        colorBtn1 = findViewById(R.id.color_btn1);
+        colorBtn2 = findViewById(R.id.color_btn2);
+        fontBtn = findViewById(R.id.font_btn);
+        styleBtn = findViewById(R.id.style_btn);
+        strikeBtn = findViewById(R.id.strike_btn);
+        underlineBtn = findViewById(R.id.underline_btn);
+        clickableBtn = findViewById(R.id.clickable_btn);
+        tv = findViewById(R.id.tv);
+
         imageBtn.setOnClickListener(this);
         urlBtn.setOnClickListener(this);
         colorBtn1.setOnClickListener(this);
@@ -87,6 +99,7 @@ public class SpannableStringActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.underline_btn:
+                getContentResolver().query(Uri.parse("content://com.qihoo360.mobilesafe.moment.provider/haha"), null, null, null, null);
                 addUnderLineSpan();
                 break;
             case R.id.strike_btn:

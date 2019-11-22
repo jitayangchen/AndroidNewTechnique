@@ -2,7 +2,17 @@ package com.example;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
+import java.util.regex.Pattern;
 
 public class MyClass {
 
@@ -127,6 +137,14 @@ public class MyClass {
 //            e.printStackTrace();
 //        }
 
+//        Calendar cal = Calendar.getInstance();
+////        cal.set(Calendar.DAY_OF_MONTH, 1);
+//        cal.setFirstDayOfWeek(Calendar.MONDAY);
+//        cal.set(Calendar.DAY_OF_WEEK, 2);
+//        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String day_first = sf.format(cal.getTime());
+//        Log.i("day_first = " + day_first);
+
 
 
 //        String str = Encrypt("yngcen6881090", "SHA-1");
@@ -145,14 +163,108 @@ public class MyClass {
 //            Log.i("i === " + i + " --- r === " + r);
 //        }
 
-        funtest(0);
+        funtest(1);
 
+
+
+//        Date date = new Date();
+//        Log.i(String.valueOf(date.getTime()));
+//        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            Log.i("LLLLL " + sdf.parse("2019-11-17").getTime());
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        DateFormat sdf_locale = new SimpleDateFormat("yyyy MMM dd HH:mm:ss", Locale.JAPANESE);
+//        System.out.println(sdf.format(date));
+//        System.out.println(sdf_locale.format(date));
+
+//        Log.i(String.valueOf(DateTimeNormalizer.convertDateLong("2019-11-17")));
+
+
+//        boolean matchesYMDHM = Pattern.matches("^\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}$", "2019-01-19 13:30");
+//        boolean matchesYMD = Pattern.matches("^\\d{4}-\\d{1,2}-\\d{1,2}$", "2019-01-19");
+//        boolean matchesMDHM = Pattern.matches("^\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}$", "01-19 13:30");
+//        boolean matchesMD = Pattern.matches("^\\d{1,2}-\\d{1,2}$", "01-19");
+//        boolean matchesHM = Pattern.matches("^\\d{1,2}:\\d{1,2}$", "13:30");
+//        Log.i("matchesYMDHM = " + matchesYMDHM);
+//        Log.i("matchesYMD = " + matchesYMD);
+//        Log.i("matchesMDHM = " + matchesMDHM);
+//        Log.i("matchesMD = " + matchesMD);
+//        Log.i("matchesHM = " + matchesHM);
+
+
+
+
+
+//        Calendar calendar = Calendar.getInstance();
+//        int year = calendar.get(Calendar.YEAR);
+//        int month = calendar.get(Calendar.MONTH);
+//        int day = calendar.get(Calendar.DAY_OF_MONTH);
+//        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+//        int minute = calendar.get(Calendar.MINUTE);
+//
+//        Log.i(String.format("%d-%d-%d %d:%d", year, month + 1, day, hour, minute));
+
+
+//        Set<String> sets = Collections.synchronizedSet(new HashSet<>());
+//        sets.add("C++");
+//        sets.add("Python");
+//        sets.add("javascript");
+//        sets.add("java");
+//
+//
+//        for (String str : sets) {
+//            Log.i(str);
+//        }
+//
+//        sets.remove("java");
+//
+//        Log.i("-----------------------------------");
+//
+//        for (String str : sets) {
+//            Log.i(str);
+//        }
+
+
+//        String plugins = "Python";
+//        String[] split = plugins.split("&");
+//        Log.i("length = " + split.length);
+
+//        for (int i = 0; i < 3; i++) {
+//            for (int j = 0; j < 3; j++) {
+//                if (j == 1) {
+//                    break;
+//                }
+//                Log.i("i = " + i + " - j = " + j);
+//            }
+//        }
+
+//        Log.i("" + (128 & 128));
+
+
+
+//        String E = "android.app.RemoteServiceException: Bad notification posted from package com.qihoo360.mobilesafe: Couldn't expand RemoteViews for: StatusBarNotification(pkg=com.qihoo360.mobilesafe user=UserHandle{0} id=1 tag=null score=20 key=0|com.qihoo360.mobilesafe|1|null|10001: Notification(pri=2 contentView=com.qihoo360.mobilesafe/0x7f03008b vibrate=null sound=null defaults=0x0 flags=0x62 color=0x00000000 vis=PRIVATE)) \n" +
+//                "   at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1763) \n" +
+//                "   at android.os.Handler.dispatchMessage(Handler.java:111) \n" +
+//                "   at android.os.Looper.loop(Looper.java:224) \n" +
+//                "   at android.app.ActivityThread.main(ActivityThread.java:5911) \n" +
+//                "   at java.lang.reflect.Method.invoke(Native Method) \n" +
+//                "   at java.lang.reflect.Method.invoke(Method.java:372) \n" +
+//                "   at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1113) \n" +
+//                "   at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:879) ";
+//
+//        if (E.contains("Couldn't expand RemoteViews for: StatusBarNotification")) {
+//            String[] split = E.split("/");
+//            String substring = split[1].substring(0, "0x7f03007f".length());
+//            Log.i(substring);
+//        }
     }
 
     private static void funtest(int i) {
         try {
             float r = 1 / i;
-
+            exceptionTest(i - 1);
             Log.i("hahaha");
         } catch (Exception e) {
             e.printStackTrace();
@@ -162,6 +274,12 @@ public class MyClass {
 
         Log.i("bottom --- ");
 
+    }
+
+    private static void exceptionTest(int i) {
+        float r = 1 / i;
+
+        Log.i("hahaha");
     }
 
     private static String a = new String("ab");

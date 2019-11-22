@@ -6,8 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.pepoc.androidnewtechnique.beziercurve.BezierCurveActivity">
 
+    <EditText
+        android:id="@+id/et_point_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"/>
 
-    <com.pepoc.androidnewtechnique.beziercurve.BezierCurveView
+
+    <com.pepoc.androidnewtechnique.beziercurve.BezierCurveViewPath
         android:id="@+id/bezier_curve_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,11 +31,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:visibility="gone"
         android:background="@mipmap/antivirus_scan_water_ripple_bg"/>
 
     <Button
         android:id="@+id/btn_record_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:text="hahaha"/>
 </RelativeLayout>

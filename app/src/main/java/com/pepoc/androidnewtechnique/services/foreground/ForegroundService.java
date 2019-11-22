@@ -1,12 +1,14 @@
 package com.pepoc.androidnewtechnique.services.foreground;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -24,33 +26,53 @@ public class ForegroundService extends Service {
     private ClipboardManager clipboardManager;
     private MyClipboardManager myClipboardManager;
     private FloatingView floatingView;
+    private NotificationManager notificationManager;
+    private Handler handler = new Handler();
+    private Notification notification;
+    private int num = 0;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         floatingView = new FloatingView(this);
+
+        notification = createForegroundService(num);
+
+        handler.postDelayed(runnable, 1000);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        createForegroundService();
         setClipboardListener();
+
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        startForeground(1, notification);
         return super.onStartCommand(intent, flags, startId);
     }
 
-    private void createForegroundService() {
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            notification = createForegroundService(++num);
+            notificationManager.notify(1, notification);
+//            startForeground(1, notification);
+            handler.postDelayed(this, 1000);
+        }
+    };
+
+    private Notification createForegroundService(int i) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         Intent notificationIntent = new Intent(this, ForegroundServiceDemoActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
         builder.setContentIntent(pendingIntent)
-                .setContentTitle("Foreground Demo")
+                .setContentTitle("Foreground Demo_ " + i)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setWhen(System.currentTimeMillis());
 
-        Notification notification = builder.build();
-        startForeground(1, notification);
+        return builder.build();
     }
 
     private void setClipboardListener() {

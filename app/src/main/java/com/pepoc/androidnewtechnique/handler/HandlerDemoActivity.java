@@ -12,7 +12,7 @@ import com.pepoc.androidnewtechnique.log.LogManager;
 
 public class HandlerDemoActivity extends AppCompatActivity {
 
-    private static Handler handler = new Handler() {
+    private static final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

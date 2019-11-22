@@ -6,14 +6,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
-    <!-- <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> -->
+    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" /> <!-- <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-feature android:name="android.hardware.location.gps" />
     <uses-feature android:name="android.hardware.camera" />
@@ -25,6 +25,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".customview.moment.AnnulusViewActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -103,7 +104,8 @@
             </intent-filter>
         </service>
         <service android:name=".screenlocker.ScreenLockService" />
-        <service android:name=".services.foreground.ForegroundService" />
+        <service android:name=".services.foreground.ForegroundService"
+            android:process=":remote"/>
 
         <receiver android:name=".broadcastreceiver.MyBroadcastReceiver">
             <intent-filter>
@@ -124,7 +126,7 @@
             android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation" />
         <activity
             android:name=".process.ProcessDemoActivity"
-            android:process=":newProcess" />
+            android:process=":remote" />
         <activity android:name=".bitmap.BitmapDemoActivity" />
         <activity android:name=".listview.RecyclerViewDemoActivity" />
         <activity android:name=".textview.TextViewDemoActivity" />
@@ -171,8 +173,10 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".keyboardinput.EditTextDemoActivity"
-            android:theme="@style/AppTheme.NoActionBar.Transparent"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"
+             />
         <activity android:name=".memoryleak.MemoryLeakActivity" />
         <activity android:name=".pool.ObjectsPoolDemoActivity" />
         <activity android:name=".constraintlayout.ConstraintLayoutDemoActivity" />
@@ -190,7 +194,16 @@
         <activity android:name=".activitytask.DTestActivity" />
         <activity android:name=".recyclerview.snaphelper.RemoveSnapActivity" />
         <activity android:name=".okhttp.retrofit.RetrofitActivity" />
-        <activity android:name=".customview.safemobile.SafeTestActivity"></activity>
+        <activity android:name=".customview.safemobile.SafeTestActivity" />
+        <activity android:name=".date.DateTestActivity" />
+
+<!--        <provider-->
+<!--            android:authorities="com.qihoo360.mobilesafe.moment.provider"-->
+<!--            android:name=".contentprovider.MyContentProvider"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true"-->
+<!--            android:process=":remote"-->
+<!--            />-->
     </application>
 
 </manifest>
